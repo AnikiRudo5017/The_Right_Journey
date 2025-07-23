@@ -1,13 +1,12 @@
 using UnityEngine;
 
 
-namespace NamTT
+
+public class BtnCloseSetting : BaseButton
 {
-    public class BtnCloseSetting : BaseButton
+    protected override void OnClick()
     {
-        protected override void OnClick()
-        {
-            UIManager.instance.OnCloseSettingpanel();
-        }
+        UIManager.instance.OnCloseSettingpanel();
     }
 }
+
