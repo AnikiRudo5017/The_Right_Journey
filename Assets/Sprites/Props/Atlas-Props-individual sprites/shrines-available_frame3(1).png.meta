@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      shrines-available_frame3(1)_0: -7898688892052812103
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      forge chimney-smoke2_frame9(1)_0: 7008281582357725936
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

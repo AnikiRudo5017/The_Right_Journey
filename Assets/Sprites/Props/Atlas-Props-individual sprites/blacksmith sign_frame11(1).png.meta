@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      blacksmith sign_frame11(1)_0: -452607388279980554
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

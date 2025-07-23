@@ -309,7 +309,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      forge1-anim1(1)_0: -4139894621656978934
+      forge1-anim1(1)_1: -2937022918822446797
+      forge1-anim1(1)_2: 1295793627355792884
+      forge1-anim1(1)_3: 807557086896867749
+      forge1-anim1(1)_4: -8659867800959933842
+      forge1-anim1(1)_5: 8177742684375463589
+      forge1-anim1(1)_6: -8403312303747988708
+      forge1-anim1(1)_7: 3573762575210960775
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

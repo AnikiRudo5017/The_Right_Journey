@@ -209,7 +209,11 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      sword sharpener-2(1)_0: -3387647339690918827
+      sword sharpener-2(1)_1: -7600067298368823866
+      sword sharpener-2(1)_2: 3293585772480037141
+      sword sharpener-2(1)_3: 3713269897530232603
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
