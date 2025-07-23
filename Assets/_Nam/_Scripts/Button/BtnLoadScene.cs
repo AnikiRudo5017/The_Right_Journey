@@ -10,6 +10,8 @@ public class BtnLoadScene : BaseButton
 
     protected override void OnClick()
     {
+        GameManager.Instance.AudioManager.Play("ButtonClick");
+        GameManager.Instance.AudioManager.Stop("Theme");
         if (useSceneIndex)
         {
             if (sceneIndex < 0)

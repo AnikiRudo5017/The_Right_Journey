@@ -9,7 +9,6 @@ using System.Security.Cryptography;
 
 public class UIManager : MonoBehaviour
 {
-    public static UIManager instance { get; private set; }
     public enum UIStat { Ready, Opening }
 
     [SerializeField] private GameObject _settingPanel;
@@ -19,20 +18,6 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI _textLoading;
     private UIStat _stat;
-
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-
-    }
     private void Start()
     {
         Initialization();
@@ -120,6 +105,7 @@ public class UIManager : MonoBehaviour
              {
                  _stat = UIStat.Ready;
                  GameManager.Instance.gameStats = GameStats.Start;
+                 GameManager.Instance.AudioManager.Play("Theme");
              });
         }
     }

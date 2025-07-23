@@ -4,6 +4,7 @@ public class BtnQuitGame : BaseButton
 {
     protected override void OnClick()
     {
-       Application.Quit();
+        GameManager.Instance.AudioManager.Play("ButtonClick");
+        Application.Quit();
     }
 }

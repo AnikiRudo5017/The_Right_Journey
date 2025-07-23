@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public static AudioManager instance;
-
     public Sound[] sounds;
 
     private void Awake()
@@ -20,10 +18,20 @@ public class AudioManager : MonoBehaviour
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
         }
+
+        if(GameManager.Instance != null)
+        {
+            AudioListener.volume = GameManager.Instance.GameSettings.GetMasterAudioState() ? 1f : 0;
+        }
+        else
+        {
+            AudioListener.volume = PlayerPrefs.GetInt("MasterAudio", 1) == 1 ? 1f : 0f;
+        }
     }
 
     private void Start()
     {
+       
         Play("Theme");
     }
 
@@ -31,5 +39,10 @@ public class AudioManager : MonoBehaviour
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Play();
+    }
+    public void Stop(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.Stop();
     }
 }

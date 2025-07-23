@@ -9,11 +9,13 @@ public class GameManager : MonoBehaviour
     [Header("Variable")]
     [SerializeField] private UIManager uiManager;
     [SerializeField] private AudioManager audioManager;
+    [SerializeField] private GameSettings gameSettings;
 
     // Convert from pritave Variable to public variable, Only Get
     public static GameManager Instance => instance;
     public UIManager UIManager => uiManager;
     public AudioManager AudioManager => audioManager;
+    public GameSettings GameSettings => gameSettings;
     private void Awake()
     {
         LoadComponent();
@@ -40,6 +42,7 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
+                audioManager.Play("ButtonClick");
                 gameStats = GameStats.Pause;
                 uiManager.OnOpenPausePanel();
             }
@@ -58,9 +61,14 @@ public class GameManager : MonoBehaviour
     }
     void LoadComponent()
     {
-        if (uiManager != null || audioManager != null) return;
+        if (uiManager != null || audioManager != null || gameSettings != null) return;
         uiManager = GetComponentInChildren<UIManager>();
         audioManager = GetComponentInChildren<AudioManager>();
+        gameSettings = GetComponentInChildren<GameSettings>();
+        if(gameSettings == null)
+        {
+            Debug.LogError($"game setting null");
+        }
     }
 
     public void LoadSceneSetStat(string name)

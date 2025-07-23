@@ -6,6 +6,8 @@ public class BtnOnClickSettings : BaseButton
 
     protected override void OnClick()
     {
-        UIManager.instance.OnOpenSettingPanel();
+        GameManager.Instance.AudioManager.Play("ButtonClick");
+        GameManager.Instance.UIManager.OnOpenSettingPanel();
+        
     }
 }

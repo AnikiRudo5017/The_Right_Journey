@@ -6,7 +6,8 @@ public class BtnCloseSetting : BaseButton
 {
     protected override void OnClick()
     {
-        UIManager.instance.OnCloseSettingpanel();
+        GameManager.Instance.AudioManager.Play("ButtonClick");
+        GameManager.Instance.UIManager.OnCloseSettingpanel();
     }
 }
 

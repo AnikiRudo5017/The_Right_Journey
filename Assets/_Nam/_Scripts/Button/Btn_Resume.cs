@@ -5,6 +5,7 @@ public class Btn_Resume : BaseButton
 {
     protected override void OnClick()
     {
-       GameManager.Instance.UIManager.OnClosePausePanel();
+        GameManager.Instance.AudioManager.Play("ButtonClick");
+        GameManager.Instance.UIManager.OnClosePausePanel();
     }
 }
