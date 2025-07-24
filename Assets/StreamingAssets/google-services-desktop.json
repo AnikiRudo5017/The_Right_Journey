@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "599721331742",
+    "firebase_url": "https://therightjourney-bcddd-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "therightjourney-bcddd",
+    "storage_bucket": "therightjourney-bcddd.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599721331742:android:8d72c51bd5237a71d9f20f",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.TheRightJourney"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBpx1zn2ySE0pIWhP_E4lZ3uuoqtYU-CA4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
