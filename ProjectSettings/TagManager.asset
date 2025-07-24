@@ -4,7 +4,9 @@
 TagManager:
   serializedVersion: 3
   tags:
-  - New tag
+  - Enemy
+  - Wall
+  - DamageZone
   layers:
   - Default
   - TransparentFX
@@ -41,21 +43,6 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: BG
-    uniqueID: 675578133
-    locked: 0
-  - name: Ground
-    uniqueID: 4261114423
-    locked: 0
-  - name: Wall
-    uniqueID: 43022535
-    locked: 0
-  - name: Gate
-    uniqueID: 623620417
-    locked: 0
-  - name: Player
-    uniqueID: 3472925547
     locked: 0
   m_RenderingLayers:
   - Default
