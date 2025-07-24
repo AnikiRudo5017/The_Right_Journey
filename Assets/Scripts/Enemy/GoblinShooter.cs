@@ -6,14 +6,14 @@ public class GoblinShooter : EnemyBase
     [Header("Ranged Attack")]
     public GameObject bulletPrefab;
     public Transform firePoint;
-    public float shootCooldown = 2f;
     public int burstCount = 3;
     public float burstInterval = 0.2f;
     public float bulletSpeed = 8f;
+    public float preShootDelay = 0.3f;
 
     public override void Attack()
     {
-        if (Time.time < lastAttackTime + shootCooldown || isAttacking) return;
+        if (Time.time < lastAttackTime + attackCooldown || isAttacking) return;
         lastAttackTime = Time.time;
         StartCoroutine(ShootBurst());
     }
@@ -22,11 +22,13 @@ public class GoblinShooter : EnemyBase
     {
         isAttacking = true;
         animator.SetTrigger("atk");
+        yield return new WaitForSeconds(preShootDelay);
         for (int i = 0; i < burstCount; i++)
         {
             SpawnBullet();
             yield return new WaitForSeconds(burstInterval);
         }
+
         isAttacking = false;
     }
 

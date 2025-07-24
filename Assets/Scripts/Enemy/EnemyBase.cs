@@ -11,7 +11,6 @@ public abstract class EnemyBase : MonoBehaviour
     public int damageAmount = 1;
 
     [Header("Health")]
-    [Tooltip("Maximum health of the enemy.")]
     public int maxHealth = 3;
 
     protected int currentHealth;
@@ -124,7 +123,10 @@ public abstract class EnemyBase : MonoBehaviour
         else if (dirX < 0)
             transform.localScale = new Vector3(-1, 1, 1);
     }
-
+    public void Initialize(Transform playerTransform)
+    {
+        player = playerTransform;
+    }
     protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
@@ -132,6 +134,5 @@ public abstract class EnemyBase : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
-
     public abstract void Attack();
 }
