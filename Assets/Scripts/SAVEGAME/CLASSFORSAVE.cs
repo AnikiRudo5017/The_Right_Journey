@@ -20,3 +20,8 @@ public class PlayerData
         
     }
 }
+
+public static class NeworLoad
+{
+    public static bool newGAME =true;
+}
