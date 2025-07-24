@@ -19,7 +19,7 @@ public class SuSiLoFIREBASE : MonoBehaviour
 
     #region thông báo đăng nhập đăng xuất  
     public GameObject notification;
-    public TextMeshProUGUI _textNotification;
+    public TextMeshProUGUI messageText;
     public Button closeNotification;
 
     #endregion
@@ -123,6 +123,70 @@ public class SuSiLoFIREBASE : MonoBehaviour
         },
            TaskScheduler.FromCurrentSynchronizationContext());
     }
+
+    public void OnResetPasswordButtonClicked(string email)
+    {
+        
+        
+
+        if (string.IsNullOrEmpty(email))
+        {
+            messageText.text = "Vui lòng nhập địa chỉ email của bạn.";
+            // StartCoroutine(ShowMessageForSecond(messageText.text, 1f));
+
+        }
+
+        // Đặt lại text thông báo
+        messageText.text = "Đang gửi yêu cầu...";
+
+        // Gửi yêu cầu đặt lại mật khẩu
+        auth.SendPasswordResetEmailAsync(email).ContinueWith(task => {
+            if (task.IsCanceled)
+            {
+                Debug.Log("SendPasswordResetEmailAsync was canceled.");
+                messageText.text = "Yêu cầu đã bị hủy.";
+                // StartCoroutine(ShowMessageForSecond(messageText.text, 1f));
+
+            }
+            if (task.IsFaulted)
+            {
+                Debug.Log($"SendPasswordResetEmailAsync encountered an error: {task.Exception}");
+                // Hiển thị lỗi cụ thể cho người dùng
+                string errorMessage = task.Exception.InnerExceptions[0].Message;
+                if (task.Exception.InnerExceptions[0] is Firebase.FirebaseException firebaseEx)
+                {
+                    // Lấy mã lỗi Firebase để cung cấp thông báo chính xác hơn
+                    // Ví dụ: AuthError.InvalidEmail, AuthError.UserNotFound
+                    AuthError errorCode = (AuthError)firebaseEx.ErrorCode;
+
+                    if (errorCode == AuthError.InvalidEmail)
+                    {
+                        errorMessage = "Địa chỉ email không hợp lệ.";
+                       Debug.Log(errorCode);
+                    }
+                    else if (errorCode == AuthError.UserNotFound)
+                    {
+                        errorMessage = "Không tìm thấy người dùng với địa chỉ email này.";
+                        Debug.Log(errorCode);
+                    }
+                    else
+                    {
+                        errorMessage = "Có lỗi xảy ra khi gửi email đặt lại mật khẩu.";
+
+                    }
+                    messageText.text = "Lỗi: " + errorMessage;
+                     StartCoroutine(ShowMessageForSecond(messageText.text, 1f));
+                }
+            }
+            // Gửi thành công!
+            messageText.text = "Vui lòng kiểm tra email của bạn để đặt lại mật khẩu.";
+           StartCoroutine(ShowMessageForSecond(messageText.text,1f));
+            Debug.Log("Password reset email sent successfully to " + email);
+        }, TaskScheduler.FromCurrentSynchronizationContext());
+
+    }
+
+
     IEnumerator LoadSceneAfterLogin(string sceneName, float time)
     {
         Debug.Log("chuan bi chuyen scene");
@@ -134,7 +198,7 @@ public class SuSiLoFIREBASE : MonoBehaviour
     {
         yield return new WaitForSeconds(duration);
         notification.SetActive(true);
-        _textNotification.text = message;
+        messageText.text = message;
     }
     public void ClosePanel(GameObject gg)
     {

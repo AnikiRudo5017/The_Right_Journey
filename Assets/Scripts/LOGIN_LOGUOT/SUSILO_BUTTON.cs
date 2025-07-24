@@ -6,6 +6,7 @@ public class SiSuLoButton : MonoBehaviour
 {
     public GameObject dk_UI;
     public GameObject dn_UI;
+    public GameObject quenMK;
 
     public SuSiLoFIREBASE siSuLoManager;
     public TMP_InputField dk_gmail;
@@ -15,6 +16,8 @@ public class SiSuLoButton : MonoBehaviour
 
     public TMP_InputField dn_gmail;
     public TMP_InputField dn_password;
+
+    public TMP_InputField emailToReset;
 
 
 
@@ -27,6 +30,7 @@ public class SiSuLoButton : MonoBehaviour
 
     }
 
+   
 
     public void dk_button()
     {
@@ -43,6 +47,17 @@ public class SiSuLoButton : MonoBehaviour
         dn_UI.SetActive(false);
         dk_UI.SetActive(true);
     }
+    public void QUENMK()
+    {
+        dn_UI.SetActive(false);
+        dk_UI.SetActive(false);
+        quenMK.SetActive(true);
 
+    }
 
+    public void GUIYEUCAURESET()
+    {
+
+        siSuLoManager.OnResetPasswordButtonClicked(emailToReset.text);
+    }
 }
