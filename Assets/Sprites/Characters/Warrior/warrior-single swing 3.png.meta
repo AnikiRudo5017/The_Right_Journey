@@ -82,7 +82,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -96,7 +96,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -148,10 +148,10 @@ TextureImporter:
       name: warrior-single swing 3_0
       rect:
         serializedVersion: 2
-        x: 48
-        y: 21
-        width: 49
-        height: 49
+        x: 0
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -170,10 +170,10 @@ TextureImporter:
       name: warrior-single swing 3_1
       rect:
         serializedVersion: 2
-        x: 196
-        y: 21
-        width: 40
-        height: 62
+        x: 144
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -192,10 +192,10 @@ TextureImporter:
       name: warrior-single swing 3_2
       rect:
         serializedVersion: 2
-        x: 346
-        y: 21
-        width: 40
-        height: 49
+        x: 288
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -214,10 +214,10 @@ TextureImporter:
       name: warrior-single swing 3_3
       rect:
         serializedVersion: 2
-        x: 473
-        y: 21
-        width: 33
-        height: 47
+        x: 432
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -236,10 +236,10 @@ TextureImporter:
       name: warrior-single swing 3_4
       rect:
         serializedVersion: 2
-        x: 615
-        y: 21
-        width: 31
-        height: 46
+        x: 576
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -258,10 +258,10 @@ TextureImporter:
       name: warrior-single swing 3_5
       rect:
         serializedVersion: 2
-        x: 759
-        y: 21
-        width: 31
-        height: 46
+        x: 720
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -280,10 +280,10 @@ TextureImporter:
       name: warrior-single swing 3_6
       rect:
         serializedVersion: 2
-        x: 920
-        y: 21
-        width: 36
-        height: 49
+        x: 864
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -302,10 +302,10 @@ TextureImporter:
       name: warrior-single swing 3_7
       rect:
         serializedVersion: 2
-        x: 1065
-        y: 21
-        width: 85
-        height: 46
+        x: 1008
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -324,10 +324,10 @@ TextureImporter:
       name: warrior-single swing 3_8
       rect:
         serializedVersion: 2
-        x: 1209
-        y: 21
-        width: 86
-        height: 47
+        x: 1152
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -346,10 +346,10 @@ TextureImporter:
       name: warrior-single swing 3_9
       rect:
         serializedVersion: 2
-        x: 1353
-        y: 21
-        width: 86
-        height: 47
+        x: 1296
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -368,10 +368,10 @@ TextureImporter:
       name: warrior-single swing 3_10
       rect:
         serializedVersion: 2
-        x: 1497
-        y: 21
-        width: 86
-        height: 47
+        x: 1440
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -390,10 +390,10 @@ TextureImporter:
       name: warrior-single swing 3_11
       rect:
         serializedVersion: 2
-        x: 1645
-        y: 21
-        width: 62
-        height: 48
+        x: 1584
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -412,10 +412,10 @@ TextureImporter:
       name: warrior-single swing 3_12
       rect:
         serializedVersion: 2
-        x: 1789
-        y: 21
-        width: 60
-        height: 48
+        x: 1728
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -434,10 +434,10 @@ TextureImporter:
       name: warrior-single swing 3_13
       rect:
         serializedVersion: 2
-        x: 1928
-        y: 21
-        width: 56
-        height: 49
+        x: 1872
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -456,10 +456,10 @@ TextureImporter:
       name: warrior-single swing 3_14
       rect:
         serializedVersion: 2
-        x: 2068
-        y: 21
-        width: 44
-        height: 53
+        x: 2016
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -478,10 +478,10 @@ TextureImporter:
       name: warrior-single swing 3_15
       rect:
         serializedVersion: 2
-        x: 2208
-        y: 21
-        width: 49
-        height: 49
+        x: 2160
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -500,7 +500,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 55f1ff10e9821364a8344e3993566770
     internalID: 0
     vertices: []
     indices: 
@@ -509,7 +509,23 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      warrior-single swing 3_0: -264138932896115549
+      warrior-single swing 3_1: -279682992797471079
+      warrior-single swing 3_10: 1953519362168137724
+      warrior-single swing 3_11: 7186911998790051736
+      warrior-single swing 3_12: 6466463897388726697
+      warrior-single swing 3_13: 7965328067842718309
+      warrior-single swing 3_14: 1376139983631912597
+      warrior-single swing 3_15: 1372843278673641399
+      warrior-single swing 3_2: 3924274821732409535
+      warrior-single swing 3_3: -8045771305076083129
+      warrior-single swing 3_4: 1012842138582743795
+      warrior-single swing 3_5: -2068653070478153785
+      warrior-single swing 3_6: 2185122199696669192
+      warrior-single swing 3_7: 8066734942857905431
+      warrior-single swing 3_8: -3431953708825861274
+      warrior-single swing 3_9: -344713987425904692
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
