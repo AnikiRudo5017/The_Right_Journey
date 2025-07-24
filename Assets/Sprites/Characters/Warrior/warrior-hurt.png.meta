@@ -58,7 +58,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -72,7 +72,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 50
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -137,10 +137,10 @@ TextureImporter:
       name: warrior-hurt_0
       rect:
         serializedVersion: 2
-        x: 38
-        y: 21
-        width: 53
-        height: 69
+        x: 0
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -159,10 +159,10 @@ TextureImporter:
       name: warrior-hurt_1
       rect:
         serializedVersion: 2
-        x: 185
-        y: 21
-        width: 53
-        height: 69
+        x: 144
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -181,10 +181,10 @@ TextureImporter:
       name: warrior-hurt_2
       rect:
         serializedVersion: 2
-        x: 332
-        y: 21
-        width: 50
-        height: 70
+        x: 288
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -203,10 +203,10 @@ TextureImporter:
       name: warrior-hurt_3
       rect:
         serializedVersion: 2
-        x: 481
-        y: 21
-        width: 47
-        height: 69
+        x: 432
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -225,10 +225,10 @@ TextureImporter:
       name: warrior-hurt_4
       rect:
         serializedVersion: 2
-        x: 628
-        y: 21
-        width: 41
-        height: 62
+        x: 576
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +247,10 @@ TextureImporter:
       name: warrior-hurt_5
       rect:
         serializedVersion: 2
-        x: 768
-        y: 21
-        width: 49
-        height: 50
+        x: 720
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -269,10 +269,10 @@ TextureImporter:
       name: warrior-hurt_6
       rect:
         serializedVersion: 2
-        x: 912
-        y: 21
-        width: 49
-        height: 49
+        x: 864
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -291,10 +291,10 @@ TextureImporter:
       name: warrior-hurt_7
       rect:
         serializedVersion: 2
-        x: 1056
-        y: 21
-        width: 49
-        height: 49
+        x: 1008
+        y: 0
+        width: 144
+        height: 96
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -313,7 +313,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 1461859425367fd4783ff216e067ec0d
     internalID: 0
     vertices: []
     indices: 
