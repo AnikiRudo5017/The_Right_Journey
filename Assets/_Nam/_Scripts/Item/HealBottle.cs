@@ -13,6 +13,7 @@ public class HealBottle : MonoBehaviour
             //healthPlayer.HealPlayer(heal)
             //Destroy(this.gameObject);
             //Spawn hi?u ?ng vào chân nhân v?t tronh 1 giây r m?t
+            GameManager.Instance.AudioManager.Play("Heal");
             Debug.Log($"GameObject: {other.gameObject.name}");
             Destroy(this.gameObject);
             GameObject newPrefab = GameObject.Instantiate(healEffectPrefabs, other.transform.position, Quaternion.identity);

@@ -34,7 +34,7 @@ public class UIManager : MonoBehaviour
             _mainMenuPanel.SetActive(true);
             _mainMenuPanel.transform.localScale = Vector3.zero;
             _mainMenuPanel.transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f)
-          .SetEase(Ease.InBack)
+          
           .OnComplete(() =>
           {
               _stat = UIStat.Ready;
