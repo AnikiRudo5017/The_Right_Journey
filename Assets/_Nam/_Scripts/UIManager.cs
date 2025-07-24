@@ -143,6 +143,7 @@ public class UIManager : MonoBehaviour
               _mainMenuPanel.SetActive(!_mainMenuPanel.activeSelf);
               _stat = UIStat.Ready;
               StartCoroutine(LoadSceneEventAsync(name));
+              GameManager.Instance.AudioManager.Play("InGame");
               GameManager.Instance.gameStats = GameStats.Playing;
           });
         }

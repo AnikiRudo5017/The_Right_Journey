@@ -1173,7 +1173,6 @@ MonoBehaviour:
   _loadingPanel: {fileID: 8055918470819929604}
   _pausePanel: {fileID: 6393456415782490290}
   _textLoading: {fileID: 4693170296839870387}
-  _stat: 0
 --- !u!224 &1596340513607889370
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3036,10 +3035,6 @@ MonoBehaviour:
   bg2: {fileID: 2100000, guid: 6b19510aaa87910459c96bb8e627ce34, type: 2}
   bg3: {fileID: 2100000, guid: 79fb96513fc67aa4ebab70ae40b1070f, type: 2}
   bg4: {fileID: 2100000, guid: 65e0fb8ce9af67547800c3ac82bf159b, type: 2}
-  offset1: 0
-  offset2: 0
-  offset3: 0
-  offset4: 0
 --- !u!114 &4511431170402062069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5421,12 +5416,12 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: InGame
-    clip: {fileID: 8300000, guid: 0496083edcd337a4a90523b3e9958e71, type: 3}
-    volume: 1
+    clip: {fileID: 8300000, guid: 3601a79e2da145c4a9fd2f01888501e9, type: 3}
+    volume: 0.3
     pitch: 1
-    loop: 0
+    loop: 1
     source: {fileID: 0}
-  - name: Boss
+  - name: BossTheme
     clip: {fileID: 8300000, guid: 0496083edcd337a4a90523b3e9958e71, type: 3}
     volume: 1
     pitch: 1
@@ -6210,7 +6205,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.2, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4363461603239662065}
