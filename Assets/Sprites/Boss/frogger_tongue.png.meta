@@ -322,7 +322,15 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      frogger_tongue_0: 2600084480928037745
+      frogger_tongue_1: -4449955879750747247
+      frogger_tongue_2: 4834729822052317330
+      frogger_tongue_3: 869385712293352049
+      frogger_tongue_4: -472582082495508076
+      frogger_tongue_5: -8381457210590004619
+      frogger_tongue_6: 3405565519603951713
+      frogger_tongue_7: -7667705410941758418
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
