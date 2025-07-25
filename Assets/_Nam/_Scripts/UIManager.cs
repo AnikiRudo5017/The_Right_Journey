@@ -15,7 +15,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject _mainMenuPanel;
     [SerializeField] private GameObject _loadingPanel;
     [SerializeField] private GameObject _pausePanel;
-    [SerializeField] private GameObject _gamePlayPanel;
+   
 
     [SerializeField] private TextMeshProUGUI _textLoading;
     private UIStat _stat;
@@ -29,7 +29,7 @@ public class UIManager : MonoBehaviour
         _settingPanel.SetActive(false);
         _loadingPanel.SetActive(false);
         _pausePanel.SetActive(false);
-        _gamePlayPanel.SetActive(false);
+      
         if (_stat == UIStat.Ready)
         {
             _stat = UIStat.Opening;
@@ -67,7 +67,7 @@ public class UIManager : MonoBehaviour
         if (_stat == UIStat.Ready)
         {
             _stat = UIStat.Opening;
-            _gamePlayPanel.SetActive(!_gamePlayPanel.activeSelf);
+         
             _pausePanel.SetActive(!_pausePanel.activeSelf);
             _pausePanel.transform.localScale = Vector3.zero;
             _pausePanel.transform.DOScale(new Vector3(0.8f, 0.8f, 0.8f), 0.5f)
@@ -89,7 +89,7 @@ public class UIManager : MonoBehaviour
           {
               _stat = UIStat.Ready;
               _pausePanel.SetActive(!_pausePanel.activeSelf);
-              _gamePlayPanel.SetActive(!_gamePlayPanel.activeSelf);
+        
               GameManager.Instance.gameStats = GameStats.Playing;
           });
         }
@@ -148,7 +148,7 @@ public class UIManager : MonoBehaviour
               StartCoroutine(LoadSceneEventAsync(name));
               GameManager.Instance.AudioManager.Play("InGame");
               GameManager.Instance.gameStats = GameStats.Playing;
-              _gamePlayPanel.SetActive(!_gamePlayPanel.activeSelf);
+            
           });
         }
     }

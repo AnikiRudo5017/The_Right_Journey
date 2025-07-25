@@ -1674,7 +1674,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: Skill2ButtonPressed
+        m_MethodName: Dash
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2019,9 +2019,9 @@ MonoBehaviour:
   skill2Button: {fileID: 4389661228010313443}
   skill2CooldownMask: {fileID: 5210873923841059432}
   skill2CooldownText: {fileID: 3593028569437891508}
-  dashButton: {fileID: 0}
-  dashCooldownMask: {fileID: 0}
-  dashCooldownText: {fileID: 0}
+  dashButton: {fileID: 7409871731058489669}
+  dashCooldownMask: {fileID: 4150195206732584187}
+  dashCooldownText: {fileID: 7560391095884363048}
   warrior: {fileID: 0}
 --- !u!1 &6362122816408857964
 GameObject:
