@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      slider_point_yellow3_0: -4094933271698706089
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      loading_blue_middle_corner_0: -2883748376646181028
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

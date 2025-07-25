@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      stamina-energy-magic_bar_bg_0: 1795277786722073350
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

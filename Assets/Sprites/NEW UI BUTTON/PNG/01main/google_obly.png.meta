@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      google_obly_0: -2625840023886606332
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

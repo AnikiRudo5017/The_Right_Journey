@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      hp_corner2_0: 8570936835552941510
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

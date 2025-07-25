@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      planet_yelllow_0: 7704270306625378095
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

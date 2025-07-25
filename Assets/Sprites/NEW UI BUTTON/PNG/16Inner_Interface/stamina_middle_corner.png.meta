@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      stamina_middle_corner_0: 2283706894379741876
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

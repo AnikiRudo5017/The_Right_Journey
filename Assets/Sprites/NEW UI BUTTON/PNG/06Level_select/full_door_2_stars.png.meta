@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      full_door_2_stars_0: -5888924104261329226
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
