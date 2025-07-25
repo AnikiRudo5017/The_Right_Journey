@@ -13,8 +13,17 @@ public class Warrior : PlayerController
     public GameObject skill1EffectPrefab;  // Prefab effect skill1
     public float skill1Range = 2f;  // Phạm vi skill (tùy chỉnh)
     public float skill1Cooldown = 5f;  // Thời gian cooldown skill
+    public Transform Skill1Point;
     private float lastSkill1Time;
 
+    [Header("Skill 2")]
+    public GameObject skill2EffectPrefab;  // Prefab effect vụ nổ (gán prefab với animation vụ nổ)
+    public float skill2Range = 3f;  // Phạm vi vụ nổ (tùy chỉnh)
+    public float skill2Cooldown = 10f;  // Thời gian cooldown skill2 (tùy chỉnh)
+    private float lastSkill2Time;
+
+    [Header("UI Reference")]
+    public SkillUI skillUI;
 
     void Start()
     {
@@ -80,7 +89,7 @@ public class Warrior : PlayerController
         // Instantiate effect Skill1 làm con của pointAttack
         if (skill1EffectPrefab != null && pointAttack != null)
         {
-            GameObject skillEffect = Instantiate(skill1EffectPrefab, pointAttack.position, Quaternion.identity, pointAttack);
+            GameObject skillEffect = Instantiate(skill1EffectPrefab, Skill1Point.position, Quaternion.identity, Skill1Point);
             Destroy(skillEffect, 0.5f);  // Tồn tại 0.5s
             Debug.Log("Skill1Effect instantiated as child of PointAttack");
         }
@@ -102,12 +111,52 @@ public class Warrior : PlayerController
                 //}
             }
         }
-
+        if (skillUI != null)
+        {
+            skillUI.StartSkill1Cooldown();  // Bắt đầu hiển thị cooldown
+        }
         StartCoroutine(ResetAttackState(0.3f));  // Reset sau 0.3s (dùng chung coroutine)
     }
     protected override void UseSkill2()
     {
-        anim.SetTrigger("Skill");
+        if (Time.time - lastSkill2Time < skill2Cooldown) return;
+        lastSkill2Time = Time.time;
+
+        isAttacking = true;  // Dừng di chuyển
+        anim.SetTrigger("Skill");  // Trigger animation Skill (hoặc "Skill2" nếu có parameter riêng)
+
+        int skill2Damage = attackDame + 15;  // Damage vụ nổ (tùy chỉnh)
+
+        // Instantiate effect vụ nổ tại vị trí nhân vật, làm con của nhân vật (hoặc pointAttack)
+        if (skill2EffectPrefab != null && transform != null)
+        {
+            GameObject explosionEffect = Instantiate(skill2EffectPrefab, transform.position, Quaternion.identity, transform);
+            Destroy(explosionEffect, 0.5f);  // Tồn tại 0.5s
+            Debug.Log("Skill2 Explosion Effect instantiated as child of player at position: " + transform.position);
+        }
+        else
+        {
+            Debug.LogWarning("skill2EffectPrefab or transform is null!");
+        }
+
+        // Gây damage cho enemy trong phạm vi vụ nổ
+        Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, skill2Range, enemyMask);
+        foreach (var enemyCollider in enemies)
+        {
+            if (enemyCollider.CompareTag("enemy"))
+            {
+                //PlayerController enemy = enemyCollider.GetComponent<PlayerController>();
+                //if (enemy != null)
+                //{
+                //    enemy.TakeDamage(skill2Damage);
+                //}
+            }
+        }
+        if (skillUI != null)
+        {
+            skillUI.StartSkill2Cooldown();  // Bắt đầu hiển thị cooldown
+        }
+        StartCoroutine(ResetAttackState(0.5f));
     }
 
     private void OnDrawGizmos()
