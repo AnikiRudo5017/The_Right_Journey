@@ -19,6 +19,7 @@ public abstract class EnemyBase : MonoBehaviour
     protected bool isDead = false;
     protected bool isAttacking = false;
     protected Animator animator;
+    PlayerController playerController;
 
     protected virtual void Start()
     {
@@ -26,6 +27,7 @@ public abstract class EnemyBase : MonoBehaviour
         animator = GetComponent<Animator>();
 
         currentHealth = maxHealth;
+       // playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
     protected virtual void Update()

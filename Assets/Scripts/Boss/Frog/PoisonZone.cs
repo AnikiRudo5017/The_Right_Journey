@@ -29,7 +29,7 @@ public class PoiSonZone : MonoBehaviour
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, col.radius * transform.localScale.x);
             foreach (var hit in hits)
             {
-                if (hit.CompareTag("Player") && hit.TryGetComponent<PlayerHealth>(out var health))
+                if (hit.CompareTag("Player") && hit.TryGetComponent<PlayerController>(out var health))
                 {
                     health.TakeDamage(damage);
                 }

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Chien;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -30,7 +31,7 @@ public class FrogBoss : EnemyBase
     {
         if (Time.time - lastAttackTime < attackCooldown || isAttacking)
             return;
-
+        
         StartCoroutine(MeleeRoutine());
     }
 
@@ -55,7 +56,7 @@ public class FrogBoss : EnemyBase
     {
         if (meleeHitbox.enabled && other.CompareTag("Player"))
         {
-            if (other.TryGetComponent<PlayerHealth>(out var health))
+            if (other.TryGetComponent<PlayerController>(out var health))
             {
                 health.TakeDamage(damageAmount);
             }
