@@ -111,7 +111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 2077491221017590616, guid: 667d69d3fbde80f43b65b08a3b884d57, type: 3}
   m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
@@ -222,13 +222,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 3
-  chaseRange: 6
-  attackRange: 1.5
+  chaseRange: 4.28
+  attackRange: 3.13
   attackCooldown: 1
   damageAmount: 1
-  maxHealth: 3
+  maxHealth: 10
   healthBar: {fileID: 0}
   healthLerpSpeed: 5
+  healthBarCanvas: {fileID: 0}
+  healthBarShowRange: 0
   bulletPrefab: {fileID: 3996085154785946133, guid: 5f3d5cad4a5b0e14698c2dcc5c5df9e1, type: 3}
   firePoint: {fileID: 8833951228675524100}
   bulletCount: 5

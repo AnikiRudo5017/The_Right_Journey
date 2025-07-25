@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Skill1
   - Skill2
+  - Enemy
+  - DamageZone
+  - Wall
   layers:
   - Default
   - TransparentFX

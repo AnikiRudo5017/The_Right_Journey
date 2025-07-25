@@ -63,7 +63,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 907386017344884694}
@@ -113,7 +113,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 2600084480928037745, guid: f95631e67909d2c4584fd1836c6aab35, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -164,7 +164,7 @@ MonoBehaviour:
   attackRange: 0.84
   attackCooldown: 1
   damageAmount: 1
-  maxHealth: 3
+  maxHealth: 40
   healthBar: {fileID: 3600081026558456402}
   healthLerpSpeed: 5
   healthBarCanvas: {fileID: 7021854284817151702}
@@ -172,10 +172,10 @@ MonoBehaviour:
   meleeHitbox: {fileID: 2745561525767420195}
   meleeDuration: 0.3
   poisonPrefab: {fileID: 8941051504005038471, guid: d741576a3f9fcd141bbed86a764a14df, type: 3}
-  poisonCooldown: 8
+  poisonCooldown: 10
   spawnDistance: 2.47
   poisonCount: 5
-  poisonWarningPrefab: {fileID: 4428263886081271950, guid: 369c95f58d839934fb62a3885f74a11d, type: 3}
+  poisonWarningPrefab: {fileID: 4306616672012523683, guid: 369c95f58d839934fb62a3885f74a11d, type: 3}
   warningDuration: 0.5
 --- !u!70 &3961801112205147293
 CapsuleCollider2D:

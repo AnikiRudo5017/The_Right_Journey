@@ -80,7 +80,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 2587706737540376869, guid: debc33e7269ae504d91d7d1dfbff9231, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -131,7 +131,7 @@ MonoBehaviour:
   attackRange: 5.76
   attackCooldown: 2
   damageAmount: 7
-  maxHealth: 3
+  maxHealth: 50
   healthBar: {fileID: 1500104719274185294}
   healthLerpSpeed: 5
   healthBarCanvas: {fileID: 2559406510110089840}

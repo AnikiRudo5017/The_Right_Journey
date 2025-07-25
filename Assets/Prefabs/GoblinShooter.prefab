@@ -63,7 +63,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.981, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 2197525370033347904}
   m_Father: {fileID: 0}
@@ -111,7 +111,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 2077491221017590616, guid: 667d69d3fbde80f43b65b08a3b884d57, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -200,11 +200,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
-  chaseRange: 3.06
-  attackRange: 1.79
+  chaseRange: 3.63
+  attackRange: 3.12
   attackCooldown: 5
   damageAmount: 1
-  maxHealth: 3
+  maxHealth: 10
+  healthBar: {fileID: 0}
+  healthLerpSpeed: 5
+  healthBarCanvas: {fileID: 0}
+  healthBarShowRange: 0
   bulletPrefab: {fileID: 3996085154785946133, guid: 5f3d5cad4a5b0e14698c2dcc5c5df9e1, type: 3}
   firePoint: {fileID: 2197525370033347904}
   burstCount: 3

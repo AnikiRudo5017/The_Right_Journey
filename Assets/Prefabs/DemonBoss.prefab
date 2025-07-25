@@ -82,7 +82,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 815424164945274260, guid: d7bff78d2b937fe4f9cf85017f37ffe7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 1
@@ -218,7 +218,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 0.59}
+    oldSize: {x: 2.5, y: 1.84375}
     newSize: {x: 0.742902, y: 0.59}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -243,7 +243,7 @@ MonoBehaviour:
   attackRange: 4.02
   attackCooldown: 2
   damageAmount: 1
-  maxHealth: 3
+  maxHealth: 30
   healthBar: {fileID: 4800984812881007070}
   healthLerpSpeed: 5
   healthBarCanvas: {fileID: 1068452089059200192}
@@ -251,7 +251,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 8823320044330114039, guid: 4fa00bb5b77db744894c69bf2c781615, type: 3}
   firePoint: {fileID: 7702448780830461358}
   arcAngle: 45
-  bulletSpeed: 2
+  bulletSpeed: 1.5
   preSpitDelay: 0.3
   teleportCooldown: 5
   teleportDistanceFromPlayer: 1
