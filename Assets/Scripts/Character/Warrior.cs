@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Warrior : PlayerController
 {
@@ -22,13 +23,22 @@ public class Warrior : PlayerController
     public float skill2Cooldown = 10f;  // Thời gian cooldown skill2 (tùy chỉnh)
     private float lastSkill2Time;
 
+    [Header("Dash")]
+    public GameObject dashEffectPrefab;  // Prefab effect dash (gán prefab trail hoặc flash)
+    public float dashForce = 10f;  // Lực dash (tùy chỉnh, thay speed bằng force cho trơn tru)
+    public float dashDuration = 0.5f;  // Thời gian dash (0.5 giây)
+    public float dashCooldown = 3f;  // Thời gian hồi chiêu dash (3 giây)
+    private float lastDashTime;
+
     [Header("UI Reference")]
     public SkillUI skillUI;
 
     void Start()
     {
-        lastAttackTime = 0f;  // Khởi tạo cooldown
-        lastSkill1Time = 0f;
+        //lastAttackTime = 0f;  // Khởi tạo cooldown
+        //lastSkill1Time = 0f;
+        //lastSkill2Time = 0f;
+        //lastDashTime = 0f;  // Khởi tạo cooldown dash
     }
 
     protected override void PerformAttack()
@@ -90,7 +100,7 @@ public class Warrior : PlayerController
         if (skill1EffectPrefab != null && pointAttack != null)
         {
             GameObject skillEffect = Instantiate(skill1EffectPrefab, Skill1Point.position, Quaternion.identity, Skill1Point);
-            Destroy(skillEffect, 0.5f);  // Tồn tại 0.5s
+            Destroy(skillEffect, 0.3f);  // Tồn tại 0.3s
             Debug.Log("Skill1Effect instantiated as child of PointAttack");
         }
         else
@@ -157,6 +167,11 @@ public class Warrior : PlayerController
             skillUI.StartSkill2Cooldown();  // Bắt đầu hiển thị cooldown
         }
         StartCoroutine(ResetAttackState(0.5f));
+    }
+
+    protected override void Dash()
+    {
+        
     }
 
     private void OnDrawGizmos()

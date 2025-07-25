@@ -14,15 +14,23 @@ public class SkillUI : MonoBehaviour
     public Image skill2CooldownMask;  // Mask vuông trắng quay đếm ngược
     public TextMeshProUGUI skill2CooldownText;  // Text đếm giây
 
+    [Header("Dash UI")]
+    public Button dashButton;  // Button icon dash
+    public Image dashCooldownMask;  // Mask vuông trắng quay đếm ngược cho dash
+    public TextMeshProUGUI dashCooldownText;  // Text đếm giây cho dash
+
     public Warrior warrior;  // Gán Warrior để lấy cooldown
 
     private float skill1Remaining = 0f;
     private float skill2Remaining = 0f;
+    private float dashRemaining = 0f;
 
     void Awake()
     {
-        DontDestroyOnLoad(this);  // Làm Canvas persist
+        //DontDestroyOnLoad(this);  // Làm Canvas persist
+        transform.localScale *= -1;
     }
+
     void Update()
     {
         // Skill1: Ban đầu fillAmount = 0 (icon bình thường, không mask)
@@ -54,6 +62,21 @@ public class SkillUI : MonoBehaviour
             skill2CooldownText.text = "";
             skill2Button.interactable = true;
         }
+
+        // Dash: Tương tự
+        if (dashRemaining > 0)
+        {
+            dashRemaining -= Time.deltaTime;
+            dashCooldownMask.fillAmount = dashRemaining / warrior.dashCooldown;  // Quay đếm ngược (từ 1 xuống 0)
+            dashCooldownText.text = Mathf.CeilToInt(dashRemaining).ToString();
+            dashButton.interactable = false;  // Disable button trong cooldown
+        }
+        else
+        {
+            dashCooldownMask.fillAmount = 0;  // Ẩn mask, icon bình thường
+            dashCooldownText.text = "";
+            dashButton.interactable = true;
+        }
     }
 
     public void StartSkill1Cooldown()
@@ -64,5 +87,10 @@ public class SkillUI : MonoBehaviour
     public void StartSkill2Cooldown()
     {
         skill2Remaining = warrior.skill2Cooldown;
+    }
+
+    public void StartDashCooldown()
+    {
+        dashRemaining = warrior.dashCooldown;
     }
 }
