@@ -44,6 +44,7 @@ public class GameSaveManager : MonoBehaviour
         });
           // Lắng nghe thay đổi auth state
         auth.StateChanged += OnAuthStateChanged;
+
     }
 
     public void OnAuthStateChanged(object sender, EventArgs eventArgs)    // Kiểm tra sự kiện của người đăng nhập

@@ -1,6 +1,8 @@
-﻿using System.Buffers.Text;
+﻿using System;
+using System.Buffers.Text;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;  // Thêm để sử dụng Slider
 
@@ -10,7 +12,7 @@ public abstract class PlayerController : MonoBehaviour
     public int level;
     [Header("Pointrank")]
     public int pointRank;
-
+    public int gold;
     [Header("Setup")]
     public int hp;
     public int maxHP;
@@ -53,7 +55,7 @@ public abstract class PlayerController : MonoBehaviour
 
     [Header("Lấy dữ liệu từ save")]
     GameSaveManager saveManager;
-
+    PlayerData playerData1= new PlayerData();
 
     [Header("LeverSystem")]
     public PlayerLevel levelInfo = new PlayerLevel();
@@ -103,6 +105,7 @@ public abstract class PlayerController : MonoBehaviour
         }
 
         UpdateDisplayEXP();
+        InvokeRepeating("AutoSave", 180f, 180f);
     }
 
     protected virtual void LateUpdate()
@@ -289,8 +292,14 @@ public abstract class PlayerController : MonoBehaviour
         }
     }
 
-    public IEnumerator AutoSave()
+    public virtual void  AutoSave()
     {
+        playerData1.gold = gold;
+        playerData1.level = level;
+        playerData1.pointRank = pointRank;
+        playerData1.timestamp = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
+
+        saveManager.SavePlayerDataToLeaderboard(playerData1);
 
     }
 }

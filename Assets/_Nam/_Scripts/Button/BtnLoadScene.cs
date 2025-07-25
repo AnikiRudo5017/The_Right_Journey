@@ -7,11 +7,20 @@ public class BtnLoadScene : BaseButton
     [SerializeField] private string sceneName;
     [SerializeField] private int sceneIndex;
     [SerializeField] private bool useSceneIndex = false;
+    public GameSaveManager saveManager;
 
+
+    protected override void Start()
+    {
+        saveManager= FindFirstObjectByType<GameSaveManager>();
+    }
     protected override void OnClick()
     {
         GameManager.Instance.AudioManager.Play("ButtonClick");
         GameManager.Instance.AudioManager.Stop("Theme");
+        NeworLoad.newGAME = true;
+        saveManager.NEWGAME("TRADV");
+
         if (useSceneIndex)
         {
             if (sceneIndex < 0)
