@@ -19,7 +19,7 @@ public abstract class PlayerController : MonoBehaviour
     public int attackDame = 10;
 
     [Header("Movement")]
-    public float moveSpeed;
+    public float moveSpeed=3.5f;
     public Vector2 movementInput;
     private float horizontal;
     private float vertical;
@@ -59,6 +59,14 @@ public abstract class PlayerController : MonoBehaviour
     public PlayerLevel levelInfo = new PlayerLevel();
 
     private static PlayerController instance;
+
+    [Header("dash")]
+    public float dashDistance = 3f;
+    public float dashDuration = 0.15f;
+    private bool isDashing = false;
+    public float dashForce = 70f;  // Lực dash (tùy chỉnh, thay speed bằng force cho trơn tru)
+
+
 
     void Awake()
     {
@@ -109,9 +117,15 @@ public abstract class PlayerController : MonoBehaviour
         StartCoroutine(LoadDATAFromSave());
     }
 
-    protected virtual void Update()
-    {
+    void Update()
+    { 
+    
         HandleInput();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            movementInput = new Vector2(horizontal, vertical);
+            DashPressed();
+        }
 
         // Hồi giáp tự động mỗi 5s
         if (Time.time - lastArmorRegenTime >= armorRegenInterval)
@@ -122,12 +136,13 @@ public abstract class PlayerController : MonoBehaviour
         }
 
         UpdateDisplayEXP();
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Dash();
-        }
+        Invoke("setMovespeed", 6f);
     }
 
+    public void setMovespeed()
+    {
+        moveSpeed = 3.5f;
+    }
     protected virtual void LateUpdate()
     {
         // Đồng bộ slider chỉ khi giá trị thay đổi (tối ưu, tránh set mỗi frame)
@@ -167,6 +182,7 @@ public abstract class PlayerController : MonoBehaviour
     {
         horizontal = joystick.Horizontal;
         vertical = joystick.Vertical;
+
         // Không cần kiểm tra phím nữa, sử dụng UI Buttons để gọi Attack() và UseNomalSkill()
     }
 
@@ -223,7 +239,12 @@ public abstract class PlayerController : MonoBehaviour
 
     protected abstract void UseSkill1();
     protected abstract void UseSkill2();
-    protected abstract void Dash();
+    public void Dash()
+    {
+        moveSpeed = 6f;
+    }
+
+   
 
     protected virtual void TakeDamage(int damage)
     {

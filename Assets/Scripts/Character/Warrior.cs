@@ -25,8 +25,7 @@ public class Warrior : PlayerController
 
     [Header("Dash")]
     public GameObject dashEffectPrefab;  // Prefab effect dash (gán prefab trail hoặc flash)
-    public float dashForce = 10f;  // Lực dash (tùy chỉnh, thay speed bằng force cho trơn tru)
-    public float dashDuration = 0.5f;  // Thời gian dash (0.5 giây)
+
     public float dashCooldown = 3f;  // Thời gian hồi chiêu dash (3 giây)
     private float lastDashTime;
 
@@ -169,10 +168,7 @@ public class Warrior : PlayerController
         StartCoroutine(ResetAttackState(0.5f));
     }
 
-    protected override void Dash()
-    {
-        
-    }
+  
 
     private void OnDrawGizmos()
     {

@@ -256,6 +256,39 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &243217616 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4150195206732584187, guid: 5b66d8391588e1c4c8f865808ea75587, type: 3}
+  m_PrefabInstance: {fileID: 1687512979663662313}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &643827547 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7560391095884363048, guid: 5b66d8391588e1c4c8f865808ea75587, type: 3}
+  m_PrefabInstance: {fileID: 1687512979663662313}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1081053995 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7409871731058489669, guid: 5b66d8391588e1c4c8f865808ea75587, type: 3}
+  m_PrefabInstance: {fileID: 1687512979663662313}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1208720921
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,6 +569,18 @@ PrefabInstance:
       propertyPath: warrior
       value: 
       objectReference: {fileID: 7941966986182878747}
+    - target: {fileID: 5808890674248956459, guid: 5b66d8391588e1c4c8f865808ea75587, type: 3}
+      propertyPath: dashButton
+      value: 
+      objectReference: {fileID: 1081053995}
+    - target: {fileID: 5808890674248956459, guid: 5b66d8391588e1c4c8f865808ea75587, type: 3}
+      propertyPath: dashCooldownMask
+      value: 
+      objectReference: {fileID: 243217616}
+    - target: {fileID: 5808890674248956459, guid: 5b66d8391588e1c4c8f865808ea75587, type: 3}
+      propertyPath: dashCooldownText
+      value: 
+      objectReference: {fileID: 643827547}
     - target: {fileID: 6150001182795505541, guid: 5b66d8391588e1c4c8f865808ea75587, type: 3}
       propertyPath: m_Name
       value: Canvas
@@ -544,6 +589,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 7941966986182878747}
+    - target: {fileID: 7409871731058489669, guid: 5b66d8391588e1c4c8f865808ea75587, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7941966986182878747}
+    - target: {fileID: 7409871731058489669, guid: 5b66d8391588e1c4c8f865808ea75587, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Dash
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -681,9 +734,17 @@ PrefabInstance:
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4334366600686231362, guid: c89952380f2f7534da09a9b0686fe2d8, type: 3}
+      propertyPath: dashForce
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 4334366600686231362, guid: c89952380f2f7534da09a9b0686fe2d8, type: 3}
       propertyPath: expSlider
       value: 
       objectReference: {fileID: 1621325164}
+    - target: {fileID: 4334366600686231362, guid: c89952380f2f7534da09a9b0686fe2d8, type: 3}
+      propertyPath: moveSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4334366600686231362, guid: c89952380f2f7534da09a9b0686fe2d8, type: 3}
       propertyPath: skill2EffectPrefab
       value: 
