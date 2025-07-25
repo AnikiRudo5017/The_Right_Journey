@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
-using UnityEngine.Rendering;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 public abstract class PlayerController : MonoBehaviour
 {
-    [Header("SetUp")]
+    [Header("Level")]
+    public int level = 1;
+
+    [Header("Setup")]
     public int hp;
     public int maxHP;
     public int attackDame;
@@ -27,7 +28,7 @@ public abstract class PlayerController : MonoBehaviour
     public Joystick joystick;
     protected bool isAttacking = false;
     protected float lastAttackTime;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Awake()
     {
         if (rb == null) rb = GetComponent<Rigidbody2D>();
@@ -36,10 +37,12 @@ public abstract class PlayerController : MonoBehaviour
         if (spriteRenderer == null) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         lastAttackTime = 0f;
     }
+
     protected virtual void Update()
     {
         HandleInput();
     }
+
     protected virtual void FixedUpdate()
     {
         HandleMovement();
@@ -48,29 +51,22 @@ public abstract class PlayerController : MonoBehaviour
             rb.linearVelocity = Vector2.zero;  // Dừng di chuyển khi tấn công
             return;
         }
-        // Xử lý vật lý di chuyển
         Vector2 velocity = movementInput.normalized * moveSpeed;
         rb.linearVelocity = velocity;
     }
+
     protected virtual void HandleInput()
     {
         horizontal = joystick.Horizontal;
         vertical = joystick.Vertical;
-        if (Input.GetKeyDown(KeyCode.J))
-        {
-            Attack();
-        }
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            UseNomalSkill();
-        }
+        // Không cần kiểm tra phím nữa, sử dụng UI Buttons để gọi Attack() và UseNomalSkill()
     }
+
     protected virtual void HandleMovement()
     {
         movementInput = new Vector2(horizontal, vertical);
 
-        // Xử lý animation
-        if (movementInput.magnitude > 0.1f)  // Ngưỡng tránh giật
+        if (movementInput.magnitude > 0.1f)
         {
             anim.SetBool("isRun", true);
         }
@@ -79,7 +75,6 @@ public abstract class PlayerController : MonoBehaviour
             anim.SetBool("isRun", false);
         }
 
-        // Lật mặt nhân vật
         if (movementInput.x > 0 && !isFacingRight)
         {
             Flip();
@@ -89,6 +84,23 @@ public abstract class PlayerController : MonoBehaviour
             Flip();
         }
     }
+
+    // Method public để UI Button gọi tấn công
+    public void AttackButtonPressed()
+    {
+        Attack();
+    }
+
+    // Method public để UI Button gọi kỹ năng
+    public void Skill1ButtonPressed()
+    {
+        UseSkill1();
+    }
+    public void Skill2ButtonPressed()
+    {
+        UseSkill2();
+    }
+
     protected virtual void Attack()
     {
         PerformAttack();
@@ -96,11 +108,13 @@ public abstract class PlayerController : MonoBehaviour
 
     protected abstract void PerformAttack();
 
-    protected abstract void UseNomalSkill();
+    protected abstract void UseSkill1();
+    protected abstract void UseSkill2();
+
     protected virtual void TakeDamage(int damage)
     {
         int actualDamage = Mathf.Max(1, damage);
-        hp = Mathf.Max(0, hp - actualDamage);  // Đảm bảo hp không âm
+        hp = Mathf.Max(0, hp - actualDamage);
         if (hp <= 0)
         {
             anim.SetTrigger("Die");
@@ -112,10 +126,11 @@ public abstract class PlayerController : MonoBehaviour
         }
     }
 
-    public virtual void RestoreHP(int amount)  //Khôi phục HP  gọi trong các hàm của item
+    public virtual void RestoreHP(int amount)
     {
         hp = Mathf.Min(maxHP, hp + amount);
     }
+
     public void Flip()
     {
         isFacingRight = !isFacingRight;
@@ -123,5 +138,4 @@ public abstract class PlayerController : MonoBehaviour
         scale.x *= -1;
         transform.localScale = scale;
     }
-
 }
