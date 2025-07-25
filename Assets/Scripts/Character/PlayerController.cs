@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;  // Thêm để sử dụng Slider
 
 public abstract class PlayerController : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public abstract class PlayerController : MonoBehaviour
     [Header("Setup")]
     public int hp;
     public int maxHP;
+    public int armor;
+    public int maxArmor;
     public int attackDame;
 
     [Header("Movement")]
@@ -24,10 +27,23 @@ public abstract class PlayerController : MonoBehaviour
     [Header("Animation")]
     public Animator anim;
 
+    [Header("UI Bars")]
+    public Slider hpBar;  // Slider hiển thị máu (HP)
+    public Slider armorBar;  // Slider hiển thị giáp (Armor)
+
+    [Header("Armor Regen")]
+    public float armorRegenInterval = 5f;  // Thời gian hồi giáp (5s)
+    public int armorRegenAmount = 1;  // Số giáp hồi mỗi lần
+
     private bool isFacingRight = true;
     public Joystick joystick;
     protected bool isAttacking = false;
     protected float lastAttackTime;
+    private float lastArmorRegenTime;
+
+    // Biến để theo dõi thay đổi (để tránh set slider liên tục)
+    private int lastHp;
+    private int lastArmor;
 
     void Awake()
     {
@@ -38,9 +54,53 @@ public abstract class PlayerController : MonoBehaviour
         lastAttackTime = 0f;
     }
 
+    void Start()
+    {
+        // Khởi tạo slider khi bắt đầu game
+        if (hpBar != null)
+        {
+            hpBar.maxValue = maxHP;
+            hpBar.value = hp;
+        }
+        if (armorBar != null)
+        {
+            armorBar.maxValue = maxArmor;
+            armorBar.value = armor;
+        }
+
+        lastArmorRegenTime = Time.time;  // Khởi tạo thời gian hồi giáp
+        lastHp = hp;  // Theo dõi ban đầu
+        lastArmor = armor;
+    }
+
     protected virtual void Update()
     {
         HandleInput();
+
+        // Hồi giáp tự động mỗi 5s
+        if (Time.time - lastArmorRegenTime >= armorRegenInterval)
+        {
+            RestoreArmor(armorRegenAmount);
+            lastArmorRegenTime = Time.time;
+            Debug.Log("Armor regenerated: " + armorRegenAmount + ", Current armor: " + armor);  // Debug để kiểm tra regen
+        }
+    }
+
+    protected virtual void LateUpdate()
+    {
+        // Đồng bộ slider chỉ khi giá trị thay đổi (tối ưu, tránh set mỗi frame)
+        if (hpBar != null && hp != lastHp)
+        {
+            hpBar.maxValue = maxHP;
+            hpBar.value = hp;
+            lastHp = hp;
+        }
+        if (armorBar != null && armor != lastArmor)
+        {
+            armorBar.maxValue = maxArmor;
+            armorBar.value = armor;
+            lastArmor = armor;
+        }
     }
 
     protected virtual void FixedUpdate()
@@ -113,12 +173,37 @@ public abstract class PlayerController : MonoBehaviour
 
     protected virtual void TakeDamage(int damage)
     {
-        int actualDamage = Mathf.Max(1, damage);
-        hp = Mathf.Max(0, hp - actualDamage);
+        int remainingDamage = damage;
+
+        // Giảm giáp trước
+        if (armor > 0)
+        {
+            if (remainingDamage >= armor)
+            {
+                remainingDamage -= armor;
+                armor = 0;
+            }
+            else
+            {
+                armor -= remainingDamage;
+                remainingDamage = 0;
+            }
+        }
+
+        // Giảm máu nếu còn damage thừa
+        if (remainingDamage > 0)
+        {
+            hp = Mathf.Max(0, hp - remainingDamage);  // Đảm bảo hp không âm
+        }
+
+        // Cập nhật slider
+        if (hpBar != null) hpBar.value = hp;
+        if (armorBar != null) armorBar.value = armor;
+
         if (hp <= 0)
         {
             anim.SetTrigger("Die");
-            // Thêm logic chết (ví dụ: Destroy(gameObject) sau animation Die)
+            StartCoroutine(DieAfterAnimation(1f));  // Giả sử animation Die kéo dài 1s, điều chỉnh nếu cần
         }
         else
         {
@@ -128,7 +213,12 @@ public abstract class PlayerController : MonoBehaviour
 
     public virtual void RestoreHP(int amount)
     {
-        hp = Mathf.Min(maxHP, hp + amount);
+        hp = Mathf.Min(maxHP, hp + amount);  // Hồi máu, không vượt maxHP
+    }
+
+    public virtual void RestoreArmor(int amount)
+    {
+        armor = Mathf.Min(maxArmor, armor + amount);  // Hồi giáp, không vượt maxArmor
     }
 
     public void Flip()
@@ -137,5 +227,11 @@ public abstract class PlayerController : MonoBehaviour
         Vector3 scale = transform.localScale;
         scale.x *= -1;
         transform.localScale = scale;
+    }
+
+    private System.Collections.IEnumerator DieAfterAnimation(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);  // Destroy nhân vật sau animation Die
     }
 }
