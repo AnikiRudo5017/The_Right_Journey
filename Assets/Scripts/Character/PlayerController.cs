@@ -1,10 +1,15 @@
-﻿using UnityEngine;
+﻿using System.Buffers.Text;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;  // Thêm để sử dụng Slider
 
 public abstract class PlayerController : MonoBehaviour
 {
     [Header("Level")]
-    public int level = 1;
+    public int level;
+    [Header("Pointrank")]
+    public int pointRank;
 
     [Header("Setup")]
     public int hp;
@@ -30,6 +35,7 @@ public abstract class PlayerController : MonoBehaviour
     [Header("UI Bars")]
     public Slider hpBar;  // Slider hiển thị máu (HP)
     public Slider armorBar;  // Slider hiển thị giáp (Armor)
+    public Slider expSlider;
 
     [Header("Armor Regen")]
     public float armorRegenInterval = 5f;  // Thời gian hồi giáp (5s)
@@ -45,6 +51,13 @@ public abstract class PlayerController : MonoBehaviour
     private int lastHp;
     private int lastArmor;
 
+    [Header("Lấy dữ liệu từ save")]
+    GameSaveManager saveManager;
+
+
+    [Header("LeverSystem")]
+    public PlayerLevel levelInfo = new PlayerLevel();
+
     void Awake()
     {
         if (rb == null) rb = GetComponent<Rigidbody2D>();
@@ -56,6 +69,7 @@ public abstract class PlayerController : MonoBehaviour
 
     void Start()
     {
+        saveManager = FindFirstObjectByType<GameSaveManager>();
         // Khởi tạo slider khi bắt đầu game
         if (hpBar != null)
         {
@@ -71,6 +85,9 @@ public abstract class PlayerController : MonoBehaviour
         lastArmorRegenTime = Time.time;  // Khởi tạo thời gian hồi giáp
         lastHp = hp;  // Theo dõi ban đầu
         lastArmor = armor;
+
+
+        StartCoroutine(LoadDATAFromSave());
     }
 
     protected virtual void Update()
@@ -84,6 +101,8 @@ public abstract class PlayerController : MonoBehaviour
             lastArmorRegenTime = Time.time;
             Debug.Log("Armor regenerated: " + armorRegenAmount + ", Current armor: " + armor);  // Debug để kiểm tra regen
         }
+
+        UpdateDisplayEXP();
     }
 
     protected virtual void LateUpdate()
@@ -234,4 +253,46 @@ public abstract class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);  // Destroy nhân vật sau animation Die
     }
+
+
+    public virtual void GainExpFromEnemy(float percent)  // hàm trừ máu gọi vào các nhân vật
+    {
+        float expToGain = levelInfo.maxEXP * percent;
+        bool leveledUp = levelInfo.AddExp(expToGain);
+
+        if (leveledUp)
+        {
+            // Gọi các chức năng khi lên level (buff máu, mở kỹ năng...)
+            maxHP = maxHP + level * 20;         // mỗi cấp +20 HP
+            maxArmor = maxArmor + level * 5;    // mỗi cấp +5 Armor
+            attackDame = attackDame + level * 3; // mỗi cấp +3 damage
+            Debug.Log("Lên level! Level mới: " + levelInfo.currentLevel);
+        }
+    }
+    public virtual void UpdateDisplayEXP()  // hiển thị exp
+    {
+        expSlider.maxValue = levelInfo.maxEXP;
+        expSlider.value = levelInfo.currentEXP;
+
+    }
+
+    public virtual IEnumerator LoadDATAFromSave()
+    {
+        yield return new WaitForSeconds(1.5f);
+        if (NeworLoad.newGAME = false)
+        {
+            level = saveManager.GetPlayerdata().level;
+        }
+        else
+        {
+            level = 1;
+        }
+    }
+
+    public IEnumerator AutoSave()
+    {
+
+    }
 }
+
+  
