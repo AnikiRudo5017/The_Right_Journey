@@ -134,7 +134,9 @@ MonoBehaviour:
   maxHealth: 3
   healthBar: {fileID: 1500104719274185294}
   healthLerpSpeed: 5
-  bulletPrefab: {fileID: 3996085154785946133, guid: 5f3d5cad4a5b0e14698c2dcc5c5df9e1, type: 3}
+  healthBarCanvas: {fileID: 2559406510110089840}
+  healthBarShowRange: 5
+  bulletPrefab: {fileID: 1320414364512766412, guid: b0d16ab5861d33740a2560299e2ebbdf, type: 3}
   firePoint: {fileID: 7452053598497509340}
   bulletSpeed: 2
   burstCount: 3

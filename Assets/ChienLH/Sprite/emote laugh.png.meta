@@ -397,7 +397,18 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      emote laugh_0: 4716428627575771252
+      emote laugh_1: 3896075091323099278
+      emote laugh_10: -4090756326704025819
+      emote laugh_2: -4475682691274202433
+      emote laugh_3: 1466849127496413723
+      emote laugh_4: -2456989739270409546
+      emote laugh_5: -5698157970824066666
+      emote laugh_6: 6245017273076470078
+      emote laugh_7: 1934816620589652045
+      emote laugh_8: -1414145794351858019
+      emote laugh_9: 6107268981326463057
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -17,6 +17,8 @@ public abstract class EnemyBase : MonoBehaviour
     [Header("UI - Health Bar")]
     public Slider healthBar;
     public float healthLerpSpeed = 5f;
+    public GameObject healthBarCanvas;
+    public float healthBarShowRange = 5f;
 
     protected int currentHealth;
     protected Transform player;
@@ -27,21 +29,26 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected virtual void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
+        player = GameObject.FindGameObjectWithTag("Player")?.transform;
         animator = GetComponent<Animator>();
         currentHealth = maxHealth;
+
         if (healthBar != null)
         {
             healthBar.minValue = 0f;
             healthBar.maxValue = 1f;
             healthBar.value = 1f;
         }
+
+        if (healthBarCanvas != null)
+            healthBarCanvas.SetActive(false);
     }
 
     protected virtual void Update()
     {
         if (isDead || player == null)
             return;
+
         float distance = Vector2.Distance(transform.position, player.position);
 
         if (isAttacking)
@@ -62,15 +69,23 @@ public abstract class EnemyBase : MonoBehaviour
         {
             animator.SetBool("run", false);
         }
+
         if (healthBar != null)
         {
             float target = (float)currentHealth / maxHealth;
             healthBar.value = Mathf.Lerp(healthBar.value, target, Time.deltaTime * healthLerpSpeed);
         }
+
         if (!isDead && player != null)
         {
             float directionX = player.position.x - transform.position.x;
             Flip(directionX);
+        }
+
+        if (healthBarCanvas != null)
+        {
+            bool shouldShow = currentHealth < maxHealth || distance <= healthBarShowRange;
+            healthBarCanvas.SetActive(shouldShow);
         }
     }
 
@@ -90,8 +105,6 @@ public abstract class EnemyBase : MonoBehaviour
 
         currentHealth -= amount;
         animator.SetTrigger("hit");
-        if (healthBar != null)
-            healthBar.value = (float)currentHealth / maxHealth;
 
         if (currentHealth <= 0)
         {
@@ -136,8 +149,14 @@ public abstract class EnemyBase : MonoBehaviour
 
     protected void Flip(float dirX)
     {
-        if (dirX > 0) transform.localScale = Vector3.one;
-        else if (dirX < 0) transform.localScale = new Vector3(-1, 1, 1);
+        if (Mathf.Approximately(dirX, 0)) return;
+
+        Vector3 newScale = transform.localScale;
+        if (dirX > 0 && newScale.x < 0 || dirX < 0 && newScale.x > 0)
+        {
+            newScale.x *= -1;
+            transform.localScale = newScale;
+        }
     }
 
     public void Initialize(Transform playerTransform)
@@ -152,7 +171,11 @@ public abstract class EnemyBase : MonoBehaviour
 
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(transform.position, healthBarShowRange);
     }
+
     public abstract void Attack();
     public int CurrentHealth => currentHealth;
 }

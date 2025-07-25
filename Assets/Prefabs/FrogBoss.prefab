@@ -167,6 +167,8 @@ MonoBehaviour:
   maxHealth: 3
   healthBar: {fileID: 3600081026558456402}
   healthLerpSpeed: 5
+  healthBarCanvas: {fileID: 7021854284817151702}
+  healthBarShowRange: 5
   meleeHitbox: {fileID: 2745561525767420195}
   meleeDuration: 0.3
   poisonPrefab: {fileID: 8941051504005038471, guid: d741576a3f9fcd141bbed86a764a14df, type: 3}

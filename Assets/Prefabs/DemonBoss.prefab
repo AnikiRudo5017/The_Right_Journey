@@ -246,6 +246,8 @@ MonoBehaviour:
   maxHealth: 3
   healthBar: {fileID: 4800984812881007070}
   healthLerpSpeed: 5
+  healthBarCanvas: {fileID: 1068452089059200192}
+  healthBarShowRange: 5
   bulletPrefab: {fileID: 8823320044330114039, guid: 4fa00bb5b77db744894c69bf2c781615, type: 3}
   firePoint: {fileID: 7702448780830461358}
   arcAngle: 45
