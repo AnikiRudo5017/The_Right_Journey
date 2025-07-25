@@ -54,6 +54,9 @@ TagManager:
   - name: Gate
     uniqueID: 623620417
     locked: 0
+  - name: Stair
+    uniqueID: 2836738561
+    locked: 0
   - name: Player
     uniqueID: 3472925547
     locked: 0
