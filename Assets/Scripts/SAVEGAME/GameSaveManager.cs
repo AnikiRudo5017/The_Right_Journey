@@ -59,8 +59,8 @@ public class GameSaveManager : MonoBehaviour
             
         }
     }
-    public async Task LoadPlayerDataFromLeaderboard()
-    {
+        public async Task LoadPlayerDataFromLeaderboard()
+       {
         Debug.Log("Đang tải dữ liệu người chơi từ leaderboard...");
 
 
@@ -70,19 +70,19 @@ public class GameSaveManager : MonoBehaviour
 
         if (string.IsNullOrEmpty(currentUserID)) return;
 
-        try
+       try
         {
             var snapshot = await dataBase.Child("leaderboard").Child(currentUserID).GetValueAsync();
             var snapshot2 = await dataBase.Child("leaderboard").GetValueAsync();
 
             if (snapshot2.Exists)
             {
-                foreach (var child in snapshot2.Children)  // cái này để lấy dữ liệu trên kia nhét vào 1 list sau đó sắp sếp  
-                {
-                    string json = child.GetRawJsonValue();
-                    PlayerData playerdata = JsonUtility.FromJson<PlayerData>(json);
-                    leaderboardData.Add(playerdata);
-                }
+                //foreach (var child in snapshot2.Children)  // cái này để lấy dữ liệu trên kia nhét vào 1 list sau đó sắp sếp  
+                //{
+                //    string json = child.GetRawJsonValue();
+                //    PlayerData playerdata = JsonUtility.FromJson<PlayerData>(json);
+                //    leaderboardData.Add(playerdata);
+                //}
 
 
 
@@ -155,34 +155,34 @@ public class GameSaveManager : MonoBehaviour
             };
             string json = JsonUtility.ToJson(playerdatanew);
 
-            await dataBase.Child("leaderboard").SetRawJsonValueAsync(json);
+            await dataBase.Child("leaderboard").Child(currentUserID).SetRawJsonValueAsync(json);
             Debug.Log("JSON to save: " + json);
 
             return true;
         }
 
         catch(Exception ex) {
-            Debug.LogError("Lỗi lưu game: " + ex.Message);
+            Debug.Log("Lỗi lưu game: " + ex.Message);
             return false;
 
         }
 
     }
 
-    public void LoadLeaderboard()
+    public async Task LoadLeaderboard()
     {
-        dataBase.Child("leaderboard").GetValueAsync().ContinueWith(task =>
+      await   dataBase.Child("leaderboard").GetValueAsync().ContinueWith(task =>
         {
             if (task.IsCompletedSuccessfully)
             {
                 var snapshot = task.Result;
-                var players = new List<PlayerData>();
+               
 
                 foreach (var child in snapshot.Children)
                 {
                     var data = child.Value as Dictionary<string, object>;
 
-                    players.Add(new PlayerData
+                    leaderboardData.Add(new PlayerData
                     {
                         userId = data["userId"].ToString(),
                         gold = int.Parse(data["gold"].ToString()),
@@ -191,12 +191,12 @@ public class GameSaveManager : MonoBehaviour
                 }
 
                 // Sắp xếp theo pointRank giảm dần
-                players = players.OrderByDescending(p => p.pointRank).ToList();
-
+                leaderboardData = leaderboardData.OrderByDescending(p => p.pointRank).ToList();
+               
                 // In ra console để test
-                for (int i = 0; i < players.Count; i++)
+                for (int i = 0; i < leaderboardData.Count; i++)
                 {
-                    Debug.Log($"#{i + 1}: {players[i].userId} - {players[i].pointRank} điểm");
+                    Debug.Log($"#{i + 1}: {leaderboardData[i].userId} - {leaderboardData[i].pointRank} điểm");
                 }
             }
         });

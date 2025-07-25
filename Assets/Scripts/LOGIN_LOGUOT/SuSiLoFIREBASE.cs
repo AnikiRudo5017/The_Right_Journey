@@ -84,7 +84,7 @@ public class SuSiLoFIREBASE : MonoBehaviour
                 Debug.LogFormat("Firebase user created successfully: {0} ({1})",
                     result.User.DisplayName, result.User.UserId);
                 StartCoroutine(ShowMessageForSecond("ĐĂNG KÝ THÀNH CÔNG", 1f));
-                StartCoroutine(LoadSceneAfterLogin("1", 3));
+                StartCoroutine(LoadSceneAfterLogin("MENU", 3));
             }
         },
         TaskScheduler.FromCurrentSynchronizationContext());
@@ -112,7 +112,7 @@ public class SuSiLoFIREBASE : MonoBehaviour
             else if (task.IsCompletedSuccessfully)
             {
                 StartCoroutine(ShowMessageForSecond("Đăng nhập thành công", 1f));
-                StartCoroutine(LoadSceneAfterLogin("1", 3f));
+                StartCoroutine(LoadSceneAfterLogin("MENU", 3f));
                 Firebase.Auth.AuthResult result = task.Result;
                 Debug.LogFormat("User signed in successfully: {0} ({1})",
                         result.User.DisplayName, result.User.UserId);
