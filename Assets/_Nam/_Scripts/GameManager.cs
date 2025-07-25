@@ -42,9 +42,7 @@ public class GameManager : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Escape))
             {
-                audioManager.Play("ButtonClick");
-                gameStats = GameStats.Pause;
-                uiManager.OnOpenPausePanel();
+               
             }
         }
     }
@@ -75,6 +73,12 @@ public class GameManager : MonoBehaviour
     {
         gameStats = GameStats.Loading;
         uiManager.LoadSceneAsyncByName(name);
+    }
+    public void OnClickPause()
+    {
+        audioManager.Play("ButtonClick");
+        gameStats = GameStats.Pause;
+        uiManager.OnOpenPausePanel();
     }
 
 
