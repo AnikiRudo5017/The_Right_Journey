@@ -255,6 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
+  pointRank: 0
   hp: 100
   maxHP: 100
   armor: 0
@@ -266,9 +267,14 @@ MonoBehaviour:
   anim: {fileID: 4116070233329074375}
   hpBar: {fileID: 0}
   armorBar: {fileID: 0}
+  expSlider: {fileID: 0}
   armorRegenInterval: 5
   armorRegenAmount: 1
   joystick: {fileID: 0}
+  levelInfo:
+    currentLevel: 1
+    currentEXP: 0
+    maxEXP: 100
   attackZonePrefab: {fileID: 7723176455478483499, guid: 3eadb3a1b4698b94b8e98a5422aa9767, type: 3}
   pointAttack: {fileID: 7062694944443153132}
   enemyMask:

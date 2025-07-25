@@ -19,6 +19,10 @@ public class SkillUI : MonoBehaviour
     private float skill1Remaining = 0f;
     private float skill2Remaining = 0f;
 
+    void Awake()
+    {
+        DontDestroyOnLoad(this);  // Làm Canvas persist
+    }
     void Update()
     {
         // Skill1: Ban đầu fillAmount = 0 (icon bình thường, không mask)

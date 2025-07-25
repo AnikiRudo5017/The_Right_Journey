@@ -13,10 +13,10 @@ public abstract class PlayerController : MonoBehaviour
 
     [Header("Setup")]
     public int hp;
-    public int maxHP;
+    public int maxHP = 100;
     public int armor;
-    public int maxArmor;
-    public int attackDame;
+    public int maxArmor = 50;
+    public int attackDame = 10;
 
     [Header("Movement")]
     public float moveSpeed;
@@ -56,10 +56,23 @@ public abstract class PlayerController : MonoBehaviour
 
 
     [Header("LeverSystem")]
-    public PlayerLevel levelInfo = new PlayerLevel();
+    [SerializeField] private PlayerLevel levelInfo = new PlayerLevel();
+
+    private static PlayerController instance;
 
     void Awake()
     {
+        // Singleton check
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);  // Giữ nhân vật
+        }
+        else
+        {
+            Destroy(gameObject);  // Xóa duplicate
+            return;
+        }
         if (rb == null) rb = GetComponent<Rigidbody2D>();
         if (col == null) col = GetComponent<Collider2D>();
         if (anim == null) anim = GetComponentInChildren<Animator>();
@@ -291,7 +304,7 @@ public abstract class PlayerController : MonoBehaviour
 
     public IEnumerator AutoSave()
     {
-
+        return null;
     }
 }
 
