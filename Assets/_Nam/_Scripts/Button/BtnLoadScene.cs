@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,11 +8,16 @@ public class BtnLoadScene : BaseButton
     [SerializeField] private string sceneName;
     [SerializeField] private int sceneIndex;
     [SerializeField] private bool useSceneIndex = false;
+ 
 
     protected override void OnClick()
-    {
+    { 
+        
         GameManager.Instance.AudioManager.Play("ButtonClick");
         GameManager.Instance.AudioManager.Stop("Theme");
+
+
+
         if (useSceneIndex)
         {
             if (sceneIndex < 0)

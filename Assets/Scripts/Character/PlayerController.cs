@@ -1,26 +1,31 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;  // Thêm để sử dụng Slider
+using UnityEngine.SceneManagement;  // Thêm cho sceneLoaded
 
 public abstract class PlayerController : MonoBehaviour
 {
     [Header("Level")]
-    public int level = 1;
+    public int level;
+    [Header("Pointrank")]
+    public int pointRank;
 
     [Header("Setup")]
     public int hp;
-    public int maxHP;
+    public int maxHP = 100;
     public int armor;
-    public int maxArmor;
-    public int attackDame;
+    public int maxArmor = 50;
+    public int attackDame = 10;
 
     [Header("Movement")]
-    public float moveSpeed;
-    private Vector2 movementInput;
+    public float moveSpeed=3.5f;
+    public Vector2 movementInput;
     private float horizontal;
     private float vertical;
 
     [Header("Physics")]
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     public Collider2D col;
     public SpriteRenderer spriteRenderer;
 
@@ -30,12 +35,13 @@ public abstract class PlayerController : MonoBehaviour
     [Header("UI Bars")]
     public Slider hpBar;  // Slider hiển thị máu (HP)
     public Slider armorBar;  // Slider hiển thị giáp (Armor)
+    public Slider expSlider;
 
     [Header("Armor Regen")]
     public float armorRegenInterval = 5f;  // Thời gian hồi giáp (5s)
     public int armorRegenAmount = 1;  // Số giáp hồi mỗi lần
 
-    private bool isFacingRight = true;
+    public bool isFacingRight = true;
     public Joystick joystick;
     protected bool isAttacking = false;
     protected float lastAttackTime;
@@ -45,17 +51,52 @@ public abstract class PlayerController : MonoBehaviour
     private int lastHp;
     private int lastArmor;
 
+    [Header("Lấy dữ liệu từ save")]
+    GameSaveManager saveManager;
+
+
+    [Header("LeverSystem")]
+    public PlayerLevel levelInfo = new PlayerLevel();
+
+    private static PlayerController instance;
+
+    [Header("dash")]
+    public float dashDistance = 3f;
+    public float dashDuration = 0.15f;
+    private bool isDashing = false;
+    public float dashForce = 70f;  // Lực dash (tùy chỉnh, thay speed bằng force cho trơn tru)
+
+
+
     void Awake()
     {
-        if (rb == null) rb = GetComponent<Rigidbody2D>();
-        if (col == null) col = GetComponent<Collider2D>();
-        if (anim == null) anim = GetComponentInChildren<Animator>();
-        if (spriteRenderer == null) spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);  // Giữ nhân vật
+        }
+        else
+        {
+            Destroy(gameObject);  // Xóa duplicate
+            return;
+        }
+
+        rb = GetComponent<Rigidbody2D>();
+        col = GetComponent<Collider2D>();
+        anim = GetComponentInChildren<Animator>();
+        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         lastAttackTime = 0f;
+
+        // Thêm debug để kiểm tra rb
+        if (rb == null)
+        {
+            Debug.LogError("Rigidbody2D not found on " + gameObject.name + ". Please attach Rigidbody2D component.");
+        }
     }
 
     void Start()
     {
+        saveManager = FindFirstObjectByType<GameSaveManager>();
         // Khởi tạo slider khi bắt đầu game
         if (hpBar != null)
         {
@@ -71,11 +112,20 @@ public abstract class PlayerController : MonoBehaviour
         lastArmorRegenTime = Time.time;  // Khởi tạo thời gian hồi giáp
         lastHp = hp;  // Theo dõi ban đầu
         lastArmor = armor;
+
+
+        StartCoroutine(LoadDATAFromSave());
     }
 
-    protected virtual void Update()
-    {
+    void Update()
+    { 
+    
         HandleInput();
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            movementInput = new Vector2(horizontal, vertical);
+            DashPressed();
+        }
 
         // Hồi giáp tự động mỗi 5s
         if (Time.time - lastArmorRegenTime >= armorRegenInterval)
@@ -84,8 +134,15 @@ public abstract class PlayerController : MonoBehaviour
             lastArmorRegenTime = Time.time;
             Debug.Log("Armor regenerated: " + armorRegenAmount + ", Current armor: " + armor);  // Debug để kiểm tra regen
         }
+
+        UpdateDisplayEXP();
+        Invoke("setMovespeed", 6f);
     }
 
+    public void setMovespeed()
+    {
+        moveSpeed = 3.5f;
+    }
     protected virtual void LateUpdate()
     {
         // Đồng bộ slider chỉ khi giá trị thay đổi (tối ưu, tránh set mỗi frame)
@@ -108,17 +165,24 @@ public abstract class PlayerController : MonoBehaviour
         HandleMovement();
         if (isAttacking)
         {
-            rb.linearVelocity = Vector2.zero;  // Dừng di chuyển khi tấn công
+            if (rb != null)
+            {
+                rb.linearVelocity = Vector2.zero;  // Dừng di chuyển khi tấn công
+            }
             return;
         }
         Vector2 velocity = movementInput.normalized * moveSpeed;
-        rb.linearVelocity = velocity;
+        if (rb != null)
+        {
+            rb.linearVelocity = velocity;
+        }
     }
 
     protected virtual void HandleInput()
     {
         horizontal = joystick.Horizontal;
         vertical = joystick.Vertical;
+
         // Không cần kiểm tra phím nữa, sử dụng UI Buttons để gọi Attack() và UseNomalSkill()
     }
 
@@ -160,6 +224,11 @@ public abstract class PlayerController : MonoBehaviour
     {
         UseSkill2();
     }
+    public void DashPressed()
+    {
+        Dash();
+    }
+
 
     protected virtual void Attack()
     {
@@ -170,6 +239,12 @@ public abstract class PlayerController : MonoBehaviour
 
     protected abstract void UseSkill1();
     protected abstract void UseSkill2();
+    public void Dash()
+    {
+        moveSpeed = 6f;
+    }
+
+   
 
     protected virtual void TakeDamage(int damage)
     {
@@ -233,5 +308,45 @@ public abstract class PlayerController : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);  // Destroy nhân vật sau animation Die
+    }
+
+
+    public virtual void GainExpFromEnemy(float percent)  // hàm trừ máu gọi vào các nhân vật
+    {
+        float expToGain = levelInfo.maxEXP * percent;
+        bool leveledUp = levelInfo.AddExp(expToGain);
+
+        if (leveledUp)
+        {
+            // Gọi các chức năng khi lên level (buff máu, mở kỹ năng...)
+            maxHP = maxHP + level * 20;         // mỗi cấp +20 HP
+            maxArmor = maxArmor + level * 5;    // mỗi cấp +5 Armor
+            attackDame = attackDame + level * 3; // mỗi cấp +3 damage
+            Debug.Log("Lên level! Level mới: " + levelInfo.currentLevel);
+        }
+    }
+    public virtual void UpdateDisplayEXP()  // hiển thị exp
+    {
+        expSlider.maxValue = levelInfo.maxEXP;
+        expSlider.value = levelInfo.currentEXP;
+
+    }
+
+    public virtual IEnumerator LoadDATAFromSave()
+    {
+        yield return new WaitForSeconds(1.5f);
+        if (NeworLoad.newGAME == false)
+        {
+            level = saveManager.GetPlayerdata().level;
+        }
+        else
+        {
+            level = 1;
+        }
+    }
+
+    public IEnumerator AutoSave()
+    {
+        return null;
     }
 }

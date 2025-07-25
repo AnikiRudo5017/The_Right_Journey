@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public abstract class BaseButton : MonoBehaviour
 {
     [SerializeField] private Button button;
-
+  
     protected virtual void Reset()
     {
         LoadButtonComponent();

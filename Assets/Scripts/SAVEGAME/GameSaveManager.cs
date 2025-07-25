@@ -44,6 +44,7 @@ public class GameSaveManager : MonoBehaviour
         });
           // Lắng nghe thay đổi auth state
         auth.StateChanged += OnAuthStateChanged;
+
     }
 
     public void OnAuthStateChanged(object sender, EventArgs eventArgs)    // Kiểm tra sự kiện của người đăng nhập
@@ -51,7 +52,7 @@ public class GameSaveManager : MonoBehaviour
         if (auth.CurrentUser != null)
         {
             currentUserID = auth.CurrentUser.UserId;   //Gán user ID vào 1 biến string
-          LoadPlayerDataFromLeaderboard();
+            LoadPlayerDataFromLeaderboard();
         }
         else
         {
@@ -89,7 +90,7 @@ public class GameSaveManager : MonoBehaviour
                 if (snapshot.Exists)
                 {
                     string json = snapshot.GetRawJsonValue();
-                    currentPlayerData = JsonUtility.FromJson<PlayerData>(json);
+                    currentPlayerData = JsonUtility.FromJson<PlayerData>(json);  // gán dữ liệu vào 1 dic
 
                     Debug.Log($"Tải thành công dữ liệu của user {currentUserID}: Gold = {currentPlayerData.gold}, Rank = {currentPlayerData.pointRank}");
                 }
@@ -149,8 +150,8 @@ public class GameSaveManager : MonoBehaviour
                 playerName = PlayerName,
                 pointRank = 0,
                 gold = 0,
-                timestamp = 0
-
+                timestamp = 0,
+                level=1
 
             };
             string json = JsonUtility.ToJson(playerdatanew);
