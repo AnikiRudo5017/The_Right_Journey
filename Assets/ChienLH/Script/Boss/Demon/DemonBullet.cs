@@ -19,7 +19,7 @@ public class DemonBullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && other.TryGetComponent<PlayerHealth>(out var health))
+        if (other.CompareTag("Player") && other.TryGetComponent<PlayerController>(out var health))
         {
             health.TakeDamage(damage);
             if (damageZonePrefab != null)

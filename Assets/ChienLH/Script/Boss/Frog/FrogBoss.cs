@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Chien;
+using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
@@ -13,10 +14,6 @@ public class FrogBoss : EnemyBase
     public float poisonCooldown = 8f;
     public float spawnDistance = 1.5f;
     public int poisonCount = 3;
-
-    [Header("Warning")]
-    public GameObject poisonWarningPrefab;
-    public float warningDuration = 1.5f;
 
     private float lastPoisonTime;
 
@@ -34,7 +31,7 @@ public class FrogBoss : EnemyBase
     {
         if (Time.time - lastAttackTime < attackCooldown || isAttacking)
             return;
-
+        
         StartCoroutine(MeleeRoutine());
     }
 
@@ -57,9 +54,12 @@ public class FrogBoss : EnemyBase
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (meleeHitbox.enabled && other.CompareTag("Player") && other.TryGetComponent<PlayerHealth>(out var health))
+        if (meleeHitbox.enabled && other.CompareTag("Player"))
         {
-            health.TakeDamage(damageAmount);
+            if (other.TryGetComponent<PlayerController>(out var health))
+            {
+                health.TakeDamage(damageAmount);
+            }
         }
     }
 
@@ -70,23 +70,10 @@ public class FrogBoss : EnemyBase
 
         yield return new WaitForSeconds(2f);
 
-        var warningList = new GameObject[poisonCount];
         float angleStep = 360f / poisonCount;
+
         for (int i = 0; i < poisonCount; i++)
         {
-            float angle = i * angleStep;
-            Vector3 offset = Quaternion.Euler(0, 0, angle) * Vector3.right * spawnDistance;
-            Vector3 warnPos = transform.position + offset;
-
-            warningList[i] = Instantiate(poisonWarningPrefab, warnPos, Quaternion.identity);
-        }
-
-        yield return new WaitForSeconds(warningDuration);
-        for (int i = 0; i < poisonCount; i++)
-        {
-            if (warningList[i] != null)
-                Destroy(warningList[i]);
-
             float angle = i * angleStep;
             Vector3 offset = Quaternion.Euler(0, 0, angle) * Vector3.right * spawnDistance;
             Vector3 spawnPos = transform.position + offset;

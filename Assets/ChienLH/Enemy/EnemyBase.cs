@@ -1,6 +1,5 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 
 public abstract class EnemyBase : MonoBehaviour
 {
@@ -14,34 +13,21 @@ public abstract class EnemyBase : MonoBehaviour
     [Header("Health")]
     public int maxHealth = 3;
 
-    [Header("UI - Health Bar")]
-    public Slider healthBar;
-    public float healthLerpSpeed = 5f;
-    public GameObject healthBarCanvas;
-    public float healthBarShowRange = 5f;
-
     protected int currentHealth;
     protected Transform player;
     protected float lastAttackTime;
     protected bool isDead = false;
     protected bool isAttacking = false;
     protected Animator animator;
+    PlayerController playerController;
 
     protected virtual void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player")?.transform;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         animator = GetComponent<Animator>();
+
         currentHealth = maxHealth;
-
-        if (healthBar != null)
-        {
-            healthBar.minValue = 0f;
-            healthBar.maxValue = 1f;
-            healthBar.value = 1f;
-        }
-
-        if (healthBarCanvas != null)
-            healthBarCanvas.SetActive(false);
+       // playerController = GameObject.FindWithTag("Player").GetComponent<PlayerController>();
     }
 
     protected virtual void Update()
@@ -54,8 +40,10 @@ public abstract class EnemyBase : MonoBehaviour
         if (isAttacking)
         {
             animator.SetBool("run", false);
+            return;
         }
-        else if (distance <= attackRange)
+
+        if (distance <= attackRange)
         {
             animator.SetBool("run", false);
             Attack();
@@ -69,36 +57,18 @@ public abstract class EnemyBase : MonoBehaviour
         {
             animator.SetBool("run", false);
         }
-
-        if (healthBar != null)
-        {
-            float target = (float)currentHealth / maxHealth;
-            healthBar.value = Mathf.Lerp(healthBar.value, target, Time.deltaTime * healthLerpSpeed);
-        }
-
-        if (!isDead && player != null)
-        {
-            float directionX = player.position.x - transform.position.x;
-            Flip(directionX);
-        }
-
-        if (healthBarCanvas != null)
-        {
-            bool shouldShow = currentHealth < maxHealth || distance <= healthBarShowRange;
-            healthBarCanvas.SetActive(shouldShow);
-        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player") &&
-            collision.collider.TryGetComponent<PlayerHealth>(out var health))
+        if (collision.collider.CompareTag("Player"))
         {
-            health.TakeDamage(damageAmount);
+            if (collision.collider.TryGetComponent<PlayerHealth>(out var health))
+                health.TakeDamage(damageAmount);
         }
     }
 
-    public virtual void TakeDamageEnemy(int amount)
+    public virtual void TakeDamage(int amount)
     {
         if (isDead)
             return;
@@ -128,8 +98,9 @@ public abstract class EnemyBase : MonoBehaviour
         isDead = true;
         animator.SetTrigger("die");
 
-        var col = GetComponent<Collider2D>();
-        if (col != null) col.enabled = false;
+        Collider2D col = GetComponent<Collider2D>();
+        if (col != null)
+            col.enabled = false;
 
         Destroy(gameObject, 1f);
     }
@@ -138,44 +109,32 @@ public abstract class EnemyBase : MonoBehaviour
     {
         if (isAttacking) return;
 
-        Vector3 dir = (player.position - transform.position).normalized;
-        float desiredDist = currentDistance - attackRange;
+        Vector3 direction = (player.position - transform.position).normalized;
+        float desiredDistance = currentDistance - attackRange;
         float moveStep = moveSpeed * Time.deltaTime;
-        float step = Mathf.Min(moveStep, desiredDist);
-
-        transform.position += dir * step;
-        Flip(dir.x);
+        float step = Mathf.Min(moveStep, desiredDistance);
+        transform.position += direction * step;
+        Flip(direction.x);
     }
+
 
     protected void Flip(float dirX)
     {
-        if (Mathf.Approximately(dirX, 0)) return;
-
-        Vector3 newScale = transform.localScale;
-        if (dirX > 0 && newScale.x < 0 || dirX < 0 && newScale.x > 0)
-        {
-            newScale.x *= -1;
-            transform.localScale = newScale;
-        }
+        if (dirX > 0)
+            transform.localScale = new Vector3(1, 1, 1);
+        else if (dirX < 0)
+            transform.localScale = new Vector3(-1, 1, 1);
     }
-
     public void Initialize(Transform playerTransform)
     {
         player = playerTransform;
     }
-
     protected virtual void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, chaseRange);
-
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
-
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, healthBarShowRange);
     }
-
     public abstract void Attack();
-    public int CurrentHealth => currentHealth;
 }
