@@ -66,7 +66,7 @@ public class BossGatling : EnemyBase
         Vector2 toPlayer = player.position - transform.position;
         if (toPlayer.magnitude <= meleeRange)
         {
-            if (player.TryGetComponent<PlayerHealth>(out var health))
+            if (player.TryGetComponent<PlayerController>(out var health))
             {
                 health.TakeDamage(damageAmount);
             }

@@ -31,9 +31,9 @@ public class UIManager : MonoBehaviour
         _settingPanel.SetActive(false);
         _loadingPanel.SetActive(false);
         _pausePanel.SetActive(false);
-        _leaderBoardPanel.SetActive(false);
-        _winPanel.SetActive(false);
-        _losePanel.SetActive(false);
+       // _leaderBoardPanel.SetActive(false);
+     //   _winPanel.SetActive(false);
+       // _losePanel.SetActive(false);
         if (_stat == UIStat.Ready)
         {
             _stat = UIStat.Opening;
