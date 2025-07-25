@@ -53,7 +53,11 @@ public abstract class PlayerController : MonoBehaviour
 
     [Header("Lấy dữ liệu từ save")]
     GameSaveManager saveManager;
+    
+    private PlayerData playerData1;
 
+    [Header("gold")]
+    public int gold;
 
     [Header("LeverSystem")]
     public PlayerLevel levelInfo = new PlayerLevel();
@@ -291,7 +295,8 @@ public abstract class PlayerController : MonoBehaviour
 
     public IEnumerator AutoSave()
     {
-
+        return null;
+       saveManager.SavePlayerDataToLeaderboard()
     }
 }
 
