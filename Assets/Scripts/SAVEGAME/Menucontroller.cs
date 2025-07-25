@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Diagnostics;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,21 +7,25 @@ public class Menucontroller : MonoBehaviour
 {
     GameSaveManager saveManager;
 
-    public TMP_InputField NamePlayer;
+   public TMP_InputField NamePlayer ;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public Button choitiep; 
     public Button choiMoi; 
     void Start()
     {
         saveManager= FindFirstObjectByType<GameSaveManager>();
-       
 
+     
     }
 
+    public void Update()
+    {
+       // NamePlayer.text = "TraDV";
+    }
     public void NewGameButton()
     {
         NeworLoad.newGAME=true;
-        saveManager.NEWGAME(NamePlayer.text);
+        saveManager.NEWGAME("TRADV");
 
     }
     
