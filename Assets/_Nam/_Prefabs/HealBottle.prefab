@@ -137,5 +137,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57f9d8e8751c8954cb9bb839b940885e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heal: 0
+  heal: 2
   healEffectPrefabs: {fileID: 3737795042649861960, guid: 4b1367da407a0424db8e0f256663a663, type: 3}

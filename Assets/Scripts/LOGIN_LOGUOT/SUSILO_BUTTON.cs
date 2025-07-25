@@ -24,13 +24,18 @@ public class SiSuLoButton : MonoBehaviour
     void Start()
     {
         siSuLoManager = GetComponent<SuSiLoFIREBASE>();
-
+        Initialize();
 
         // dk_button.onClick.AddListener(()=>siSuLoManager.DKTK(dk_gmail.text,dk_password.text));
 
     }
 
-   
+   private void Initialize()
+    {
+        dk_UI.gameObject.SetActive(false);
+        quenMK.gameObject.SetActive(false);
+        dn_UI.gameObject.SetActive(true);
+    }
 
     public void dk_button()
     {
@@ -41,6 +46,12 @@ public class SiSuLoButton : MonoBehaviour
     public void dn_button()
     {
         siSuLoManager.DNTK(dn_gmail.text, dn_password.text);
+    }
+    public void OnClickBackButton()
+    {
+        dk_UI.SetActive(false);
+        dn_UI.SetActive(true);
+        quenMK.SetActive(false);
     }
     public void DangKyNgay()
     {
@@ -54,6 +65,7 @@ public class SiSuLoButton : MonoBehaviour
         quenMK.SetActive(true);
 
     }
+
 
     public void GUIYEUCAURESET()
     {
