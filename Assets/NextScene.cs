@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class NextScene : MonoBehaviour
 {
@@ -7,7 +8,7 @@ public class NextScene : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            GameManager.Instance.LoadSceneSetStat(nameScene);
+            SceneManager.LoadScene(nameScene);
         }
     }
 }

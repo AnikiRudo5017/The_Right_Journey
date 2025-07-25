@@ -4,6 +4,7 @@ using TMPro;
 
 public class SkillUI : MonoBehaviour
 {
+    public static SkillUI canvas1;
     [Header("Skill 1 UI")]
     public Button skill1Button;  // Button icon skill1
     public Image skill1CooldownMask;  // Mask vuông trắng quay đếm ngược
@@ -27,7 +28,14 @@ public class SkillUI : MonoBehaviour
 
     void Awake()
     {
-        //DontDestroyOnLoad(this);  // Làm Canvas persist
+        if (canvas1 != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this);
+        }
         transform.localScale *= -1;
     }
 
