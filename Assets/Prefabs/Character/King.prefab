@@ -142,8 +142,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -497330081
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: -3725521666771283068, guid: 84f5dc3581ea9c048beb3420f4b30586, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -204,7 +204,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &1066833084868443055
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -255,20 +255,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   level: 1
+  pointRank: 0
   hp: 100
   maxHP: 100
-  armor: 0
-  maxArmor: 0
+  armor: 100
+  maxArmor: 100
   attackDame: 10
   moveSpeed: 5
+  movementInput: {x: 0, y: 0}
+  rb: {fileID: 0}
   col: {fileID: 1066833084868443055}
   spriteRenderer: {fileID: 8070348455672659181}
   anim: {fileID: 4116070233329074375}
   hpBar: {fileID: 0}
   armorBar: {fileID: 0}
+  expSlider: {fileID: 0}
   armorRegenInterval: 5
   armorRegenAmount: 1
+  isFacingRight: 1
   joystick: {fileID: 0}
+  levelInfo:
+    currentLevel: 1
+    currentEXP: 0
+    maxEXP: 100
   attackZonePrefab: {fileID: 7723176455478483499, guid: 3eadb3a1b4698b94b8e98a5422aa9767, type: 3}
   pointAttack: {fileID: 7062694944443153132}
   enemyMask:
@@ -280,9 +289,13 @@ MonoBehaviour:
   skill1Range: 2
   skill1Cooldown: 1
   Skill1Point: {fileID: 7013623517299642353}
-  skill2EffectPrefab: {fileID: 4247589507549291431, guid: e0f522f4ed16da2439224ad115ff6ca2, type: 3}
+  skill2EffectPrefab: {fileID: 8399274197704690145, guid: e0f522f4ed16da2439224ad115ff6ca2, type: 3}
   skill2Range: 4
   skill2Cooldown: 1
+  dashEffectPrefab: {fileID: 9124275910713381655, guid: 5ad7184974b519e498348c7bf8acda6c, type: 3}
+  dashSpeed: 10
+  dashDuration: 0.5
+  dashCooldown: 3
   skillUI: {fileID: 0}
 --- !u!1 &7040069048258035707
 GameObject:
