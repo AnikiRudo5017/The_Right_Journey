@@ -92,7 +92,7 @@ public abstract class EnemyBase : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player") &&
-            collision.collider.TryGetComponent<PlayerHealth>(out var health))
+            collision.collider.TryGetComponent<Warrior>(out var health))
         {
             health.TakeDamage(damageAmount);
         }

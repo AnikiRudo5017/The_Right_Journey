@@ -34,18 +34,29 @@ public class UIManager : MonoBehaviour
         _leaderBoardPanel.SetActive(false);
         _winPanel.SetActive(false);
         _losePanel.SetActive(false);
-        if (_stat == UIStat.Ready)
+        string currentScene = SceneManager.GetActiveScene().name;
+        string sceneName = "MainMenu";
+        if (currentScene == sceneName)
         {
-            _stat = UIStat.Opening;
-            _mainMenuPanel.SetActive(true);
-            _mainMenuPanel.transform.localScale = Vector3.zero;
-            _mainMenuPanel.transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f)
-          
-          .OnComplete(() =>
-          {
-              _stat = UIStat.Ready;
-          });
+            if (_stat == UIStat.Ready)
+            {
+                _stat = UIStat.Opening;
+                _mainMenuPanel.SetActive(true);
+                _mainMenuPanel.transform.localScale = Vector3.zero;
+                _mainMenuPanel.transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f)
+
+              .OnComplete(() =>
+              {
+                  _stat = UIStat.Ready;
+              });
+            }
         }
+        else
+        {
+            _mainMenuPanel.SetActive(false);
+            Debug.Log($"This is {currentScene} scene");
+        }
+           
     }
     public void OnOpenSettingPanel()
     {
@@ -198,7 +209,8 @@ public class UIManager : MonoBehaviour
         if(_stat == UIStat.Ready)
         {
             _stat = UIStat.Opening;
-            _pausePanel.SetActive(!_pausePanel.activeSelf);
+            _losePanel.SetActive(false);
+            _pausePanel.SetActive(false);
             StartCoroutine(LoadSceneEventAsync("MainMenu"));
             _mainMenuPanel.SetActive(!_mainMenuPanel.activeSelf);
             _mainMenuPanel.transform.DOScale(new Vector3(1f, 1f, 1f), 0.5f)

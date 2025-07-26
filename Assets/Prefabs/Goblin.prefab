@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4651522459833848551}
   - component: {fileID: 4816799774850346205}
   - component: {fileID: 4808581985103299468}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Goblin
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -154,7 +154,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.26, y: 0.3900952}
+  m_Size: {x: 0.5, y: 1}
   m_Direction: 0
 --- !u!114 &4651522459833848551
 MonoBehaviour:

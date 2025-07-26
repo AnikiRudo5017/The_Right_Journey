@@ -1,4 +1,6 @@
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameSettings : MonoBehaviour
 {
@@ -24,5 +26,10 @@ public class GameSettings : MonoBehaviour
         Application.targetFrameRate = fps;
         PlayerPrefs.SetInt("TargetFPS", fps);
         PlayerPrefs.Save();
+    }
+
+    public bool IsScene(string sceneName)
+    {
+        return SceneManager.GetActiveScene().name == sceneName; 
     }
 }

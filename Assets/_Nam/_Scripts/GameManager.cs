@@ -1,4 +1,6 @@
+using UnityEditor.SearchService;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public enum GameStats { Start, Playing, Pause, Win, Lose, Loading }
 public class GameManager : MonoBehaviour
 {
@@ -10,12 +12,16 @@ public class GameManager : MonoBehaviour
     [SerializeField] private UIManager uiManager;
     [SerializeField] private AudioManager audioManager;
     [SerializeField] private GameSettings gameSettings;
+    [SerializeField] private PlayerManager playerManager;
 
     // Convert from pritave Variable to public variable, Only Get
     public static GameManager Instance => instance;
     public UIManager UIManager => uiManager;
     public AudioManager AudioManager => audioManager;
     public GameSettings GameSettings => gameSettings;
+    public PlayerManager PlayerManager => playerManager;
+
+
     private void Awake()
     {
         LoadComponent();
@@ -34,6 +40,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         gameStats = GameStats.Start;
+       
     }
 
     private void Update()
@@ -63,6 +70,7 @@ public class GameManager : MonoBehaviour
         uiManager = GetComponentInChildren<UIManager>();
         audioManager = GetComponentInChildren<AudioManager>();
         gameSettings = GetComponentInChildren<GameSettings>();
+        playerManager = GetComponentInChildren<PlayerManager>();
         if(gameSettings == null)
         {
             Debug.LogError($"game setting null");

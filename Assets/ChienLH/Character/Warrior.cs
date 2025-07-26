@@ -44,7 +44,7 @@ public class Warrior : PlayerController
     {
         if (Time.time - lastAttackTime < attackCooldown) return;
         lastAttackTime = Time.time;
-
+        GameManager.Instance.AudioManager.Play("Slash");
         isAttacking = true;  // Dừng di chuyển
         anim.SetTrigger("Attack");  // Trigger animation
 
@@ -66,14 +66,14 @@ public class Warrior : PlayerController
         Collider2D[] enemies = Physics2D.OverlapCircleAll(pointAttack.position, attackRange, enemyMask);
         foreach (var enemyCollider in enemies)
         {
-            if (enemyCollider.CompareTag("enemy"))
+            if (enemyCollider.CompareTag("Enemy"))
             {
-                //PlayerController enemy = enemyCollider.GetComponent<PlayerController>();
-                //if (enemy != null)
-                //{
-                //    enemy.TakeDamage(damage);
-                //    Debug.Log("Damage applied to enemy: " + damage);  // Debug để kiểm tra
-                //}
+                EnemyBase enemy = enemyCollider.GetComponent<EnemyBase>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamageEnemy(damage);
+                    Debug.Log("Damage applied to enemy: " + damage);  // Debug để kiểm tra
+                }
             }
         }
         StartCoroutine(ResetAttackState(0.3f));
@@ -89,7 +89,7 @@ public class Warrior : PlayerController
     {
         if (Time.time - lastSkill1Time < skill1Cooldown) return;
         lastSkill1Time = Time.time;
-
+        GameManager.Instance.AudioManager.Play("Skill1");
         isAttacking = true;  // Dừng di chuyển (dùng chung isAttacking)
         anim.SetTrigger("Skill");  // Trigger animation Skill
 
@@ -99,6 +99,7 @@ public class Warrior : PlayerController
         if (skill1EffectPrefab != null && pointAttack != null)
         {
             GameObject skillEffect = Instantiate(skill1EffectPrefab, Skill1Point.position, Quaternion.identity, Skill1Point);
+            skillEffect.GetComponent<Collider2D>().isTrigger = true;
             Destroy(skillEffect, 0.3f);  // Tồn tại 0.3s
             Debug.Log("Skill1Effect instantiated as child of PointAttack");
         }
@@ -111,13 +112,13 @@ public class Warrior : PlayerController
         Collider2D[] enemies = Physics2D.OverlapCircleAll(pointAttack.position, skill1Range, enemyMask);
         foreach (var enemyCollider in enemies)
         {
-            if (enemyCollider.CompareTag("enemy"))
+            if (enemyCollider.CompareTag("Enemy"))
             {
-                //PlayerController enemy = enemyCollider.GetComponent<PlayerController>();
-                //if (enemy != null)
-                //{
-                //    enemy.TakeDamage(skillDamage);
-                //}
+                EnemyBase enemy = enemyCollider.GetComponent<EnemyBase>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamageEnemy(skillDamage);
+                }
             }
         }
         if (skillUI != null)
@@ -130,7 +131,7 @@ public class Warrior : PlayerController
     {
         if (Time.time - lastSkill2Time < skill2Cooldown) return;
         lastSkill2Time = Time.time;
-
+        GameManager.Instance.AudioManager.Play("Skill2");
         isAttacking = true;  // Dừng di chuyển
         anim.SetTrigger("Skill");  // Trigger animation Skill (hoặc "Skill2" nếu có parameter riêng)
 
@@ -140,6 +141,7 @@ public class Warrior : PlayerController
         if (skill2EffectPrefab != null && transform != null)
         {
             GameObject explosionEffect = Instantiate(skill2EffectPrefab, transform.position, Quaternion.identity, transform);
+            explosionEffect.GetComponent<Collider2D>().isTrigger = true;
             Destroy(explosionEffect, 0.5f);  // Tồn tại 0.5s
             Debug.Log("Skill2 Explosion Effect instantiated as child of player at position: " + transform.position);
         }
@@ -152,13 +154,14 @@ public class Warrior : PlayerController
         Collider2D[] enemies = Physics2D.OverlapCircleAll(transform.position, skill2Range, enemyMask);
         foreach (var enemyCollider in enemies)
         {
-            if (enemyCollider.CompareTag("enemy"))
+            if (enemyCollider.CompareTag("Enemy"))
             {
-                //PlayerController enemy = enemyCollider.GetComponent<PlayerController>();
-                //if (enemy != null)
-                //{
-                //    enemy.TakeDamage(skill2Damage);
-                //}
+                EnemyBase enemy = enemyCollider.GetComponent<EnemyBase>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamageEnemy(skill2Damage);
+                    Debug.Log("Dame" + skill2Damage);
+                }
             }
         }
         if (skillUI != null)

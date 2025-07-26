@@ -12,11 +12,11 @@ public abstract class PlayerController : MonoBehaviour
     public int pointRank;
 
     [Header("Setup")]
-    public int hp;
-    public int maxHP = 100;
-    public int armor;
-    public int maxArmor = 50;
-    public int attackDame = 10;
+    [SerializeField] protected int hp;
+    [SerializeField] protected int maxHP;
+    [SerializeField] protected int armor;
+    [SerializeField] protected int maxArmor;
+    protected int attackDame = 10;
 
     [Header("Movement")]
     public float moveSpeed=3.5f;
@@ -70,16 +70,7 @@ public abstract class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(gameObject);  // Giữ nhân vật
-        }
-        else
-        {
-            Destroy(gameObject);  // Xóa duplicate
-            return;
-        }
+
 
         rb = GetComponent<Rigidbody2D>();
         col = GetComponent<Collider2D>();
@@ -92,22 +83,34 @@ public abstract class PlayerController : MonoBehaviour
         {
             Debug.LogError("Rigidbody2D not found on " + gameObject.name + ". Please attach Rigidbody2D component.");
         }
+        if (GameManager.Instance != null)
+        {
+            Initilazer();
+        }
+        else
+        {
+            Debug.Log("Playermanager chưa được khởi tạo ");
+        }
     }
 
     void Start()
     {
         saveManager = FindFirstObjectByType<GameSaveManager>();
+      
         // Khởi tạo slider khi bắt đầu game
-        if (hpBar != null)
-        {
-            hpBar.maxValue = maxHP;
-            hpBar.value = hp;
-        }
-        if (armorBar != null)
-        {
-            armorBar.maxValue = maxArmor;
-            armorBar.value = armor;
-        }
+        //if (hpBar != null)
+        //{
+            
+        //    hpBar.maxValue = maxHP;
+        //    hp = maxHP;
+        //    hpBar.value = hp;
+        //}
+        //if (armorBar != null)
+        //{
+        //    armorBar.maxValue = maxArmor;
+        //    armor = maxArmor;
+        //    armorBar.value = armor;
+        //}
 
         lastArmorRegenTime = Time.time;  // Khởi tạo thời gian hồi giáp
         lastHp = hp;  // Theo dõi ban đầu
@@ -115,6 +118,14 @@ public abstract class PlayerController : MonoBehaviour
 
 
         StartCoroutine(LoadDATAFromSave());
+    }
+
+    public void Initilazer()
+    {
+        hp = GameManager.Instance.PlayerManager.GetHealth();
+        maxHP = GameManager.Instance.PlayerManager.GetMaxHealth();
+        armor = GameManager.Instance.PlayerManager.GetArmor();
+        maxArmor = GameManager.Instance.PlayerManager.GetMaxArmor();
     }
 
     void Update()
@@ -213,26 +224,31 @@ public abstract class PlayerController : MonoBehaviour
     public void AttackButtonPressed()
     {
         Attack();
+        
     }
 
     // Method public để UI Button gọi kỹ năng
     public void Skill1ButtonPressed()
     {
         UseSkill1();
+
     }
     public void Skill2ButtonPressed()
     {
         UseSkill2();
+
     }
     public void DashPressed()
     {
         Dash();
+        GameManager.Instance.AudioManager.Play("BuffSpeed");
     }
 
 
     protected virtual void Attack()
     {
         PerformAttack();
+       
     }
 
     protected abstract void PerformAttack();
@@ -246,7 +262,7 @@ public abstract class PlayerController : MonoBehaviour
 
    
 
-    protected virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage)
     {
         int remainingDamage = damage;
 
@@ -262,6 +278,7 @@ public abstract class PlayerController : MonoBehaviour
             {
                 armor -= remainingDamage;
                 remainingDamage = 0;
+               
             }
         }
 
@@ -278,6 +295,8 @@ public abstract class PlayerController : MonoBehaviour
         if (hp <= 0)
         {
             anim.SetTrigger("Die");
+            GameManager.Instance.gameStats = GameStats.Lose;
+            GameManager.Instance.UIManager.OpenLosePanel();
             StartCoroutine(DieAfterAnimation(1f));  // Giả sử animation Die kéo dài 1s, điều chỉnh nếu cần
         }
         else

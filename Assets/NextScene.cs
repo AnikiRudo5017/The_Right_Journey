@@ -8,7 +8,7 @@ public class NextScene : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            SceneManager.LoadScene(nameScene);
+            GameManager.Instance.LoadSceneSetStat(nameScene);
         }
     }
 }

@@ -37,7 +37,7 @@ public class Goblin : EnemyBase
     {
         if (attackHitbox.enabled && other.CompareTag("Player"))
         {
-            if (other.TryGetComponent<PlayerHealth>(out var health))
+            if (other.TryGetComponent<Warrior>(out var health))
             {
                 health.TakeDamage(damageAmount);
             }
